@@ -29,6 +29,10 @@ class LoginPreference(context: Context) {
         return LoginResultResponse(name, userId, token)
     }
 
+    fun getToken(): String? {
+        return sharedPreferences.getString(KEY_TOKEN, null)
+    }
+
     fun clearLogin() {
         val editor = sharedPreferences.edit()
         editor.remove(KEY_NAME)

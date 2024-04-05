@@ -10,6 +10,7 @@
 
     <ImageView
         android:id="@+id/ivLogin"
+        android:contentDescription="@string/gambar_animasi"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Sudah Siap Untuk Berbagi Cerita?"
+        android:text="@string/desc_login1"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +47,7 @@
         android:id="@+id/desc2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Masukkan dulu datamu yaa"
+        android:text="@string/desc_login2"
         style="@style/poppinsRegular"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,9 +63,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/rounded_edittext_background"
-        android:drawableLeft="@drawable/ic_outline_email"
+        android:drawableStart="@drawable/ic_outline_email"
         android:drawablePadding="8dp"
-        android:hint="email@pengguna.com"
+        android:hint="@string/example_email"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="10dp"
         android:textSize="14sp"
@@ -83,7 +84,7 @@
         android:background="@drawable/rounded_edittext_background"
         android:drawableStart="@drawable/ic_outline_password"
         android:drawablePadding="8dp"
-        android:hint="Password Pengguna"
+        android:hint="@string/example_pass"
         android:inputType="textPassword"
         android:paddingHorizontal="10dp"
         android:textSize="14sp"
@@ -97,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Password"
+        android:text="@string/password"
         style="@style/poppinsMedium"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +117,8 @@
         app:layout_constraintTop_toBottomOf="@+id/ed_login_email" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivLogo"
+        android:contentDescription="@string/logo_aplikasi"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginBottom="24dp"
@@ -127,12 +129,13 @@
 
     <Button
         android:id="@+id/BtnLogin"
+        android:contentDescription="@string/login_sekarang"
         style="@style/poppinsMedium"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/navi"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,6 +143,7 @@
 
     <ImageButton
         android:id="@+id/btnBack"
+        android:contentDescription="@string/kembali_ke_halaman_sebelumnya"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -150,27 +154,27 @@
         app:srcCompat="@drawable/baseline_arrow_back_24" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvTanyaAkun"
         style="@style/poppinsRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Belum Punya Akun ?"
+        android:text="@string/belum_punya_akun"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDaftar"
         app:layout_constraintStart_toStartOf="@+id/BtnLogin"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        app:layout_constraintTop_toTopOf="@+id/btnDaftar" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnDaftar"
         style="@style/poppinsSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/transparent"
         android:paddingHorizontal="5dp"
-        android:text="Daftar Disini"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
+        android:text="@string/daftar_disini"
+        app:layout_constraintStart_toEndOf="@+id/tvTanyaAkun"
         app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
 
     <ProgressBar

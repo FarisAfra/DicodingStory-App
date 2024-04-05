@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
 
         progressBar.visibility = View.VISIBLE
         // Membuat instance dari ApiService
-        val apiService = ApiClient.getApiService()
+        val apiService = ApiClient.getApiService(this)
 
         // Memanggil endpoint register dengan menggunakan suspend function
         lifecycleScope.launch {

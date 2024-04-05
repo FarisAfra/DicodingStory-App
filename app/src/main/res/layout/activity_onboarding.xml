@@ -12,6 +12,7 @@
 
     <ImageView
         android:id="@+id/logoMenu1"
+        android:contentDescription="@string/gambar_menu"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:src="@drawable/image_kurikulum_global"
@@ -49,6 +50,7 @@
 
     <ImageView
         android:id="@+id/logoMenu2"
+        android:contentDescription="@string/gambar_menu"
         android:layout_width="0dp"
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,6 +88,7 @@
 
     <ImageView
         android:id="@+id/logoMenu3"
+        android:contentDescription="@string/gambar_menu"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:src="@drawable/image_code_review"
@@ -123,6 +126,7 @@
 
     <ImageView
         android:id="@+id/logoMenu4"
+        android:contentDescription="@string/gambar_menu"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:src="@drawable/image_alumni_terpercaya"
@@ -241,7 +245,8 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivLogo"
+        android:contentDescription="@string/logo_aplikasi"
         android:layout_width="0dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

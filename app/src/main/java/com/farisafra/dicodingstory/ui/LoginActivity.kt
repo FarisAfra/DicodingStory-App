@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         // Tampilkan ProgressBar
         progressBar.visibility = View.VISIBLE
 
-        val apiService = ApiClient.getApiService()
+        val apiService = ApiClient.getApiService(this)
 
         lifecycleScope.launch {
             try {

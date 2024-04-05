@@ -8,7 +8,8 @@
     tools:context=".ui.MainActivity">
 
     <ImageButton
-        android:id="@+id/btnLogout"
+        android:id="@+id/action_logout"
+        android:contentDescription="@string/logout_akun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -35,7 +36,7 @@
         style="@style/poppinsRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selamat Datang, "
+        android:text="@string/wellcome"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tvNameApp"
         app:layout_constraintTop_toBottomOf="@+id/tvNameApp" />
@@ -45,24 +46,27 @@
         style="@style/poppinsSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="{user}"
+        android:text="@string/user_akun"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvWelcome"
         app:layout_constraintStart_toEndOf="@+id/tvWelcome"
         app:layout_constraintTop_toTopOf="@+id/tvWelcome" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="662dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/rvStories"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/addStory"
+        android:contentDescription="@string/tambah_cerita"
         android:layout_width="62dp"
         android:layout_height="65dp"
         android:layout_marginEnd="24dp"
