@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.DicodingStory" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="poppinsExtraLight">
+        <item name="fontFamily">@font/poppins_extralight</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsLight">
+        <item name="fontFamily">@font/poppins_light</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsRegular">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsMedium">
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsSemiBold">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsBold">
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsExtraBold">
+        <item name="fontFamily">@font/poppins_extrabold</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+    <style name="poppinsBlack">
+        <item name="fontFamily">@font/poppins_black</item>
+        <item name="android:textColor">@color/navi</item>
+    </style>
+
+    <style name="Theme.DicodingStory" parent="Base.Theme.DicodingStory" />
+</resources>
