@@ -9,7 +9,6 @@ import android.os.Looper
 import android.transition.TransitionManager
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.farisafra.dicodingstory.R
-import com.farisafra.dicodingstory.data.Utils
 
 
 class SplashScreenActivity : AppCompatActivity() {

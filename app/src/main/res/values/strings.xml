@@ -40,4 +40,6 @@
     <string name="detail_story">Detail Story</string>
     <string name="diunggah">Diunggah Oleh:</string>
     <string name="deskripsi_story">Deskripsi Story:</string>
+    <string name="error_message">Something wrong with our server.\nPlease try again later.</string>
+    <string name="file_provider_authority">your.package.name.fileprovider</string>
 </resources>

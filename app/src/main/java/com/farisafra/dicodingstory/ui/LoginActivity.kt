@@ -1,5 +1,6 @@
 package com.farisafra.dicodingstory.ui
 
+import LoginViewModel
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +9,11 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.farisafra.dicodingstory.R
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
+import com.farisafra.dicodingstory.data.repository.Result
 import com.farisafra.dicodingstory.data.response.login.LoginResponse
 import com.farisafra.dicodingstory.data.retrofit.ApiClient
 import com.farisafra.dicodingstory.data.retrofit.ApiService
@@ -32,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     private lateinit var progressBar: ProgressBar
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -39,6 +43,16 @@ class LoginActivity : AppCompatActivity() {
 
         progressBar = binding.progressBar
 
+        loginBtnClick()
+        backActivity()
+        moveToRegister()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun loginBtnClick() {
         binding.BtnLogin.setOnClickListener {
             val email = binding.edLoginEmail.text.toString().trim()
             val password = binding.edLoginPassword.text.toString().trim()
@@ -49,18 +63,16 @@ class LoginActivity : AppCompatActivity() {
                 login(email, password)
             }
         }
-        binding.btnBack.setOnClickListener { moveToBackToMenu4() }
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun login(email: String, password: String) {
         // Tampilkan ProgressBar
         progressBar.visibility = View.VISIBLE
 
-        val apiService = ApiClient.getApiService(this)
+        val loginPreference = LoginPreference(this)
+        val token = loginPreference.getToken() ?: ""
+
+        val apiService = ApiClient.getApiService(token)
 
         lifecycleScope.launch {
             try {
@@ -90,15 +102,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun moveToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
     }
 
-    private fun moveToBackToMenu4() {
-        val intent = Intent(this, OnBoardingActivity::class.java)
-        intent.putExtra("navigateToMenu", 4)
-        startActivity(intent)
-        finish()
+    private fun moveToRegister() {
+        binding.btnDaftar.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun backActivity() {
+        binding.btnBack.setOnClickListener {
+            val intent = Intent(this, OnBoardingActivity::class.java)
+            intent.putExtra("navigateToMenu", 4)
+            startActivity(intent)
+        }
     }
 }
