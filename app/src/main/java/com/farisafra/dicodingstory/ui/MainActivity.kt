@@ -7,51 +7,39 @@ import android.os.Handler
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
-import com.farisafra.dicodingstory.data.response.story.Story
-import com.farisafra.dicodingstory.data.retrofit.ApiClient
+import com.farisafra.dicodingstory.data.viewmodel.StoriesViewModel
+import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityMainBinding
 import com.farisafra.dicodingstory.ui.adapter.StoryAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var loginPreference: LoginPreference // Tambahkan ini
     private lateinit var storyAdapter: StoryAdapter
-
+    lateinit var vmFactory: ViewModelFactory
+    private val storiesViewModel: StoriesViewModel by viewModels { vmFactory }
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        loginPreference = LoginPreference(this)
-
-        val userData = loginPreference.getLogin()
-
-        binding.addStory.setOnClickListener {  }
-
-        binding.tvUsername.text = userData.userId
-
-        binding.actionLogout.setOnClickListener {
-            // Panggil clearLogin() ketika tombol logout ditekan
-            loginPreference.clearLogin()
-            // Setelah logout, arahkan pengguna ke halaman login atau onboarding
-            moveToLoginOrOnBoarding()
-        }
-
-        // Initialize storyAdapter
         storyAdapter = StoryAdapter(ArrayList())
 
 
 
+        setupViewModel()
+        getusername()
         setupRecyclerView()
         fetchStories()
         moveToAddStory()
+        refreshPage()
+
     }
 
     private fun setupRecyclerView() {
@@ -62,41 +50,51 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun fetchStories() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val loginPreference = LoginPreference(this@MainActivity)
-                val token = loginPreference.getToken() ?: ""
+    private fun setupViewModel() {
+        vmFactory = ViewModelFactory.getInstance(binding.root.context)
+    }
 
-                val response = ApiClient.getApiService(token).getAllStories()
-                if (!response.error) {
-                    updateStories(response.listStory)
-                } else {
-                    showError(response.message)
+    private fun fetchStories() {
+        storiesViewModel.getStories().observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is com.farisafra.dicodingstory.data.repository.Result.Loading -> {
+                        binding?.progressBar?.visibility = View.VISIBLE
+                    }
+                    is com.farisafra.dicodingstory.data.repository.Result.Success -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        val storyData = result.data.listStory
+                        storyAdapter.submitList(storyData)
+                        swipeRefreshLayout.isRefreshing = false
+                    }
+                    is com.farisafra.dicodingstory.data.repository.Result.Error -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        showToast("error")
+                    }
                 }
-            } catch (e: HttpException) {
-                showError("An error occurred. Please try again.")
-                e.printStackTrace()
-            } catch (e: Exception) {
-                showError("An error occurred. Please try again.")
-                e.printStackTrace()
             }
         }
     }
 
-    override fun onClick(v: View?) {
+    private fun getusername() {
+        loginPreference = LoginPreference(this)
+        val userData = loginPreference.getLogin()
+        binding.tvUsername.text = userData.userId
 
-    }
-
-    private fun updateStories(stories: ArrayList<Story>) {
-        runOnUiThread {
-            storyAdapter.setData(stories)
+        binding.actionLogout.setOnClickListener {
+            loginPreference.clearLogin()
+            moveToLoginOrOnBoarding()
         }
     }
 
-    private fun showError(message: String) {
-        // Show error message to the user
+    private fun refreshPage() {
+        swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            fetchStories()
+            showToast("Data Telah di Update")
+        }
     }
+
 
     private fun moveToLoginOrOnBoarding() {
         val intent = Intent(this, OnBoardingActivity::class.java)

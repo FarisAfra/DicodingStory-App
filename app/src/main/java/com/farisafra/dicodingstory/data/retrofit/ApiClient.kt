@@ -1,6 +1,5 @@
 package com.farisafra.dicodingstory.data.retrofit
 
-import android.content.Context
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

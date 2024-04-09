@@ -23,7 +23,7 @@
         android:id="@+id/tvAddStory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tambahkan Cerita"
+        android:text="@string/add_a_story"
         style="@style/poppinsRegular"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +54,23 @@
             tools:layout_editor_absoluteY="16dp"
             app:srcCompat="@drawable/add_image" />
 
+        <ImageButton
+            android:id="@+id/btnDeleteImage"
+            android:contentDescription="@string/delete_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/delete"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
         android:id="@+id/btnCamera"
+        android:contentDescription="@string/open_camera"
         android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -70,6 +83,7 @@
 
     <ImageButton
         android:id="@+id/btnGallery"
+        android:contentDescription="@string/open_gallery"
         android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -82,7 +96,7 @@
 
     <ImageButton
         android:id="@+id/btnBack"
-        android:contentDescription="@string/kembali_ke_halaman_sebelumnya"
+        android:contentDescription="@string/go_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -94,7 +108,7 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:contentDescription="@string/logo_aplikasi"
+        android:contentDescription="@string/logo_app"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginBottom="24dp"
@@ -109,7 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Tambahkan Deskripsi Cerita :"
+        android:text="@string/add_description"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/btnGallery"
         app:layout_constraintStart_toStartOf="@+id/btnCamera"
@@ -132,14 +146,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDesc" />
 
     <Button
-        android:id="@+id/BtnAddStory"
-        android:contentDescription="@string/login_sekarang"
+        android:id="@+id/button_add"
+        android:contentDescription="@string/upload_story"
         style="@style/poppinsMedium"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/navi"
-        android:text="Unggah Cerita"
+        android:text="@string/upload_story"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,11 +1,9 @@
 package com.farisafra.dicodingstory.ui.adapter
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farisafra.dicodingstory.data.response.story.Story
@@ -68,10 +66,10 @@ class StoryAdapter(private val stories: ArrayList<Story>)
         return stories.size
     }
 
-    fun setData(newStories: List<Story>) {
+    fun submitList(newStories: List<Story>) {
         stories.clear()
         stories.addAll(newStories)
-        notifyDataSetChanged()
+        notifyDataSetChanged() // Or use DiffUtil for better performance
     }
 }
 

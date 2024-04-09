@@ -4,13 +4,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Environment
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
-import java.text.SimpleDateFormat
-import java.util.Locale
+
 
 private const val MAXIMAL_SIZE = 1000000
 

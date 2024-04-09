@@ -3,40 +3,39 @@ package com.farisafra.dicodingstory.ui
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.farisafra.dicodingstory.R
 import com.farisafra.dicodingstory.data.getTempUriFromFile
-import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import com.farisafra.dicodingstory.data.reduceFileImage
-import com.farisafra.dicodingstory.data.response.story.StoryResponse
-import com.farisafra.dicodingstory.data.retrofit.ApiClient
 import com.farisafra.dicodingstory.data.uriToFile
+import com.farisafra.dicodingstory.data.viewmodel.AddStoryViewModel
+import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityAddStoryBinding
-import com.google.gson.Gson
-import kotlinx.coroutines.launch
+import com.farisafra.dicodingstory.ui.customview.ResponseView
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.HttpException
-import java.io.File
+
 
 class AddStoryActivity : AppCompatActivity() {
-    lateinit var binding: ActivityAddStoryBinding
+    private lateinit var binding: ActivityAddStoryBinding
     private var currentImageUri: Uri? = null
-    private lateinit var currentPhotoPath: String
-    private var getFile: File? = null
+    private lateinit var vmFactory: ViewModelFactory
+    private val addStoryViewModel: AddStoryViewModel by viewModels { vmFactory }
+    private lateinit var progressBar: ProgressBar
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -64,22 +63,31 @@ class AddStoryActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
+        progressBar = binding.progressBar
+
+        setupViewModel()
         openCamera()
         openGallery()
         goToUpload()
+        deleteImage()
+        btnBack()
+    }
+
+    private fun setupViewModel() {
+        vmFactory = ViewModelFactory.getInstance(binding.root.context)
     }
 
     private fun goToUpload() {
-        binding.BtnAddStory.setOnClickListener {
+        binding.buttonAdd.setOnClickListener {
             val desc = binding.edAddDescription.text.toString().trim()
-            if (currentImageUri == null && currentImageUri.toString().isEmpty() && desc.isEmpty()) {
+            if (currentImageUri == null && desc.isEmpty()) {
                 showToast("Silakan pilih gambar dan isi deskripsi terlebih dahulu")
             } else if (desc.isEmpty()) {
                 showToast("Silakan isi deskripsi terlebih dahulu")
-            } else if (currentImageUri == null && currentImageUri.toString().isEmpty()) {
+            } else if (currentImageUri == null ) {
                 showToast("Silakan pilih gambar terlebih dahulu")
             } else {
-                uploadImage()
+                createStory(desc)
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
@@ -87,37 +95,44 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage() {
+    private fun createStory(description: String) {
         currentImageUri?.let { uri ->
-            val imageFile = uriToFile(uri, this)
-            Log.d("Image File", "showImage: ${imageFile.path}")
-            val description = binding.edAddDescription.text.toString().trim()
-            showLoading(true)
+            fun convertImage(): MultipartBody.Part {
+                val imageFile = uriToFile(uri, this).reduceFileImage()
+                Log.d("Image File", "showImage: ${imageFile.path}")
+                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
 
-            val requestBody = description.toRequestBody("text/plain".toMediaType())
-            val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
-            val multipartBody = MultipartBody.Part.createFormData(
-                "photo",
-                imageFile.name,
-                requestImageFile
-            )
-            lifecycleScope.launch {
-                try {
-                    val loginPreference = LoginPreference(this@AddStoryActivity)
-                    val token = loginPreference.getToken() ?: ""
-                    val apiService = ApiClient.getApiService(token)
-                    val successResponse = apiService.addStory(multipartBody, requestBody)
-                    showToast("Telah Berhasil Upload Story")
-                    showLoading(false)
-                } catch (e: HttpException) {
-                    val errorBody = e.response()?.errorBody()?.string()
-                    val errorResponse = Gson().fromJson(errorBody, StoryResponse::class.java)
-                    showToast(errorResponse.message)
-                    showLoading(false)
+                return MultipartBody.Part.createFormData(
+                    "photo",
+                    imageFile.name,
+                    requestImageFile
+                )
+            }
+            val image = convertImage()
+            val desc = convertDescription(description)
+            addStoryViewModel.postStory(image, desc).observe(this@AddStoryActivity) { result ->
+                if (result != null) {
+                    when(result) {
+                        is com.farisafra.dicodingstory.data.repository.Result.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                        }
+                        is com.farisafra.dicodingstory.data.repository.Result.Error -> {
+                            progressBar.visibility = View.GONE
+                            errorResponse()
+                        }
+                        is com.farisafra.dicodingstory.data.repository.Result.Success -> {
+                            successResponse()
+                            progressBar.visibility = View.GONE
+                        }
+                    }
                 }
             }
+        }
+    }
 
-        } ?: showToast("Gambar Kosong")
+
+    private fun convertDescription(description: String): RequestBody {
+        return description.toRequestBody("text/plain".toMediaType())
     }
 
     private fun openCamera() {
@@ -127,6 +142,16 @@ class AddStoryActivity : AppCompatActivity() {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
+    }
+
+    private fun errorResponse() {
+        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
+    }
+
+    private fun successResponse() {
+        binding.edAddDescription.text?.clear()
+        deleteImage()
+        ResponseView(this, R.string.register_message, R.drawable.registered).show()
     }
 
     private fun openGallery() {
@@ -145,23 +170,43 @@ class AddStoryActivity : AppCompatActivity() {
                     binding.ivStoryPhoto.setImageBitmap(imageBitmap)
                     val tempUri = getTempUriFromFile(this, imageBitmap)
                     currentImageUri = tempUri
+                    Glide.with(this).load(tempUri).into(binding.ivStoryPhoto)
+                    showDeleteBtn()
                 }
                 REQUEST_PICK_IMAGE -> {
                     data?.data?.let { uri ->
                         currentImageUri = uri
                         binding.ivStoryPhoto.setImageURI(uri)
+                        Glide.with(this).load(currentImageUri).into(binding.ivStoryPhoto)
+                        showDeleteBtn()
                     }
                 }
             }
         }
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    private fun deleteImage() {
+        binding.btnDeleteImage.setOnClickListener {
+            currentImageUri = null
+            Glide.with(this)
+                .load(R.drawable.add_image)
+                .into(binding.ivStoryPhoto)
+            binding.btnDeleteImage.visibility = View.GONE
+        }
     }
+
     private fun showToast(message: String?) {
         message?.let {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun showDeleteBtn() {
+        binding.btnDeleteImage.visibility = View.VISIBLE
+    }
+
+    private fun btnBack() {
+        binding.btnBack.setOnClickListener {
+            finish()
         }
     }
 

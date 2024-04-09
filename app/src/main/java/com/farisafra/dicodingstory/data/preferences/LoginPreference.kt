@@ -30,8 +30,9 @@ class LoginPreference(context: Context) {
     }
 
     fun getToken(): String? {
-        return sharedPreferences.getString(KEY_TOKEN, null)
+        return sharedPreferences.getString(KEY_TOKEN, " ") ?: ""
     }
+
 
     fun clearLogin() {
         val editor = sharedPreferences.edit()

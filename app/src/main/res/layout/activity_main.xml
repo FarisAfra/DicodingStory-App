@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".ui.MainActivity">
-
     <ImageButton
         android:id="@+id/action_logout"
         android:contentDescription="@string/logout_akun"
@@ -36,7 +35,7 @@
         style="@style/poppinsRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/wellcome"
+        android:text="@string/hello"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tvNameApp"
         app:layout_constraintTop_toBottomOf="@+id/tvNameApp" />
@@ -46,27 +45,38 @@
         style="@style/poppinsSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/user_akun"
+        android:layout_marginStart="5dp"
+        android:text="@string/user"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvWelcome"
         app:layout_constraintStart_toEndOf="@+id/tvWelcome"
         app:layout_constraintTop_toTopOf="@+id/tvWelcome" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStories"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvStories"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton
         android:id="@+id/addStory"
-        android:contentDescription="@string/tambah_cerita"
+        android:contentDescription="@string/add_story"
         android:layout_width="62dp"
         android:layout_height="65dp"
         android:layout_marginEnd="24dp"
@@ -76,6 +86,15 @@
         android:backgroundTint="@color/transparent"
         app:srcCompat="@drawable/addstory" />
 
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

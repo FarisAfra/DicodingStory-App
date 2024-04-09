@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/ivLogin"
-        android:contentDescription="@string/gambar_animasi"
+        android:contentDescription="@string/moving_image"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
@@ -106,11 +106,11 @@
 
     <TextView
         android:id="@+id/tvPassword"
+        style="@style/poppinsMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/password"
-        style="@style/poppinsMedium"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +118,7 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:contentDescription="@string/logo_aplikasi"
+        android:contentDescription="@string/logo_app"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginBottom="24dp"
@@ -129,7 +129,7 @@
 
     <Button
         android:id="@+id/BtnLogin"
-        android:contentDescription="@string/login_sekarang"
+        android:contentDescription="@string/login_now"
         style="@style/poppinsMedium"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
@@ -143,7 +143,7 @@
 
     <ImageButton
         android:id="@+id/btnBack"
-        android:contentDescription="@string/kembali_ke_halaman_sebelumnya"
+        android:contentDescription="@string/go_back"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -158,24 +158,24 @@
         style="@style/poppinsRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/belum_punya_akun"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnDaftar"
+        app:layout_constraintEnd_toEndOf="@+id/BtnLogin"
         app:layout_constraintStart_toStartOf="@+id/BtnLogin"
-        app:layout_constraintTop_toTopOf="@+id/btnDaftar" />
+        app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
 
     <Button
         android:id="@+id/btnDaftar"
         style="@style/poppinsSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
         android:backgroundTint="@color/transparent"
         android:paddingHorizontal="5dp"
-        android:text="@string/daftar_disini"
-        app:layout_constraintStart_toEndOf="@+id/tvTanyaAkun"
-        app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
+        android:text="@string/register_here"
+        app:layout_constraintEnd_toEndOf="@+id/tvTanyaAkun"
+        app:layout_constraintStart_toStartOf="@+id/tvTanyaAkun"
+        app:layout_constraintTop_toBottomOf="@+id/tvTanyaAkun" />
 
     <ProgressBar
         android:id="@+id/progressBar"

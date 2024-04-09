@@ -3,6 +3,7 @@ package com.farisafra.dicodingstory.data.retrofit
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import com.farisafra.dicodingstory.data.response.login.LoginResponse
 import com.farisafra.dicodingstory.data.response.register.RegisterResponse
+import com.farisafra.dicodingstory.data.response.story.AddStoryResponse
 import com.farisafra.dicodingstory.data.response.story.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,12 +38,16 @@ interface ApiService {
 
 
     @GET("stories")
-    suspend fun getAllStories(): StoryResponse
+    suspend fun getAllStories(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("location") location: Int
+    ): StoryResponse
 
     @Multipart
     @POST("stories")
     suspend fun addStory(
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody
-    )
+    ): AddStoryResponse
 }

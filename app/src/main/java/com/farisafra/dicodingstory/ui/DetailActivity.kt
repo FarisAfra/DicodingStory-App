@@ -3,11 +3,8 @@ package com.farisafra.dicodingstory.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.farisafra.dicodingstory.data.response.story.Story
-import com.farisafra.dicodingstory.data.viewmodel.DetailViewModel
 import com.farisafra.dicodingstory.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {

@@ -4,100 +4,93 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputBinding
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.viewModels
 import com.farisafra.dicodingstory.R
-import com.farisafra.dicodingstory.data.preferences.LoginPreference
-import com.farisafra.dicodingstory.data.response.register.RegisterResponse
-import com.farisafra.dicodingstory.data.retrofit.ApiClient
+import com.farisafra.dicodingstory.data.repository.Result
+import com.farisafra.dicodingstory.data.viewmodel.RegisterViewModel
+import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityRegisterBinding
-import com.google.gson.Gson
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import com.farisafra.dicodingstory.ui.customview.ResponseView
 
 class RegisterActivity : AppCompatActivity() {
-    lateinit var binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityRegisterBinding
     private lateinit var progressBar: ProgressBar
+    private lateinit var vmFactory: ViewModelFactory
+    private val registerViewModel: RegisterViewModel by viewModels { vmFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        progressBar = binding.progressBar // Inisialisasi progressBar
+        progressBar = binding.progressBar
 
-        binding.btnBack.setOnClickListener { moveToBackToMenu4() }
+        setupViewModel()
+        backActivity()
+        registerBtnClick()
+
+    }
+
+    private fun setupViewModel() {
+        vmFactory = ViewModelFactory.getInstance(binding.root.context)
+    }
+
+    private fun registerBtnClick() {
         binding.BtnRegister.setOnClickListener {
             val name = binding.edRegisterName.text.toString().trim()
             val email = binding.edRegisterEmail.text.toString().trim()
             val password = binding.edRegisterPassword.text.toString().trim()
 
-            // Validasi input sebelum melakukan registrasi
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                showToast("Please fill in all fields")
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || password.length < 8 || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this@RegisterActivity, R.string.fill_data, Toast.LENGTH_SHORT).show()
             } else {
-                // Lakukan proses registrasi
                 register(name, email, password)
             }
         }
     }
 
     private fun register(name: String, email: String, password: String) {
-
-        progressBar.visibility = View.VISIBLE
-        // Membuat instance dari ApiService
-        val loginPreference = LoginPreference(this)
-        val token = loginPreference.getToken() ?: ""
-
-        val apiService = ApiClient.getApiService(token)
-
-        // Memanggil endpoint register dengan menggunakan suspend function
-        lifecycleScope.launch {
-            try {
-                // Mengirim data registrasi ke server
-                val response = apiService.register(name, email, password)
-                // Jika tidak terjadi error
-                if (!response.error) {
-                    showToast("Register successful")
-                    // Menampilkan pesan sukses
-                    showToast(response.message)
-                    // Redirect ke halaman login atau halaman utama
-                    moveToLoginPage()
-                } else {
-                    // Menampilkan pesan error
-                    showToast(response.message)
+        registerViewModel.postRegister(name, email, password).observe(this@RegisterActivity) { result ->
+            if (result != null) {
+                when(result) {
+                    is com.farisafra.dicodingstory.data.repository.Result.Loading -> {
+                        progressBar.visibility = View.VISIBLE
+                    }
+                    is com.farisafra.dicodingstory.data.repository.Result.Error -> {
+                        progressBar.visibility = View.GONE
+                        errorResponse()
+                    }
+                    is com.farisafra.dicodingstory.data.repository.Result.Success -> {
+                        progressBar.visibility = View.GONE
+                        successRegister()
+                    }
                 }
-            } catch (e: HttpException) {
-                // Handling error jika terjadi kesalahan pada HTTP request
-                val errorBody = e.response()?.errorBody()?.string()
-                val errorResponse = Gson().fromJson(errorBody, RegisterResponse::class.java)
-                showToast(errorResponse.message)
-            } catch (e: Exception) {
-                // Handling error jika terjadi kesalahan lainnya
-                showToast("Terjadi kesalahan. Silakan coba lagi.")
-                e.printStackTrace()
-            } finally {
-                progressBar.visibility = View.GONE
             }
         }
     }
 
-    private fun moveToBackToMenu4() {
-        val intent = Intent(this, OnBoardingActivity::class.java)
-        intent.putExtra("navigateToMenu", 4)
-        startActivity(intent)
-        finish()
+    private fun successRegister() {
+        binding.edRegisterName.text?.clear()
+        binding.edRegisterEmail.text?.clear()
+        binding.edRegisterPassword.text?.clear()
+        ResponseView(this, R.string.register_message, R.drawable.registered, moveToLoginPage()).show()
     }
 
-    private fun moveToLoginPage() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+    private fun moveToLoginPage(): () -> Unit {
+        return {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun errorResponse() {
+        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
     }
+    private fun backActivity() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+    }
+
 }

@@ -1,15 +1,10 @@
 package com.farisafra.dicodingstory.ui.customview
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
-import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat
-import com.farisafra.dicodingstory.R
 
 class PasswordEditText(context: Context, attrs: AttributeSet) : AppCompatEditText(context, attrs) {
 

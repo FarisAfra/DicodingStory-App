@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Dicoding Story</string>
-
     <string name="title_menu_1">Kurikulum Standar Industri Global</string>
     <string name="title_menu_2">Belajar Fleksibel Sesuai Jadwal Anda</string>
     <string name="title_menu_3">Code Review dari Developer Expert</string>
@@ -11,35 +9,61 @@
     <string name="desc_menu_4">Sertifikat yang membuktikan pengetahuan fundamental beserta keterampilan nyata yang diinginkan perusahaan global.</string>
     <string name="learn_now">Belajar Sekarang</string>
     <string name="daftar">Daftar</string>
-    <string name="login">Login</string>
-    <string name="desc_login1">Sudah Siap Untuk Berbagi Cerita?</string>
-    <string name="desc_login2">Masukkan dulu datamu yaa</string>
-    <string name="gambar_animasi">Gambar Animasi Bergerak</string>
-    <string name="example_email">email@pengguna.com</string>
-    <string name="example_pass">Password Pengguna</string>
+    <string name="logout_akun">Logout dari Akun</string>
+    <string name="gambar_menu">Gambar Menu</string>
+    <string name="file_provider_authority">your.package.name.fileprovider</string>
+
+<!--    All Activity-->
+    <string name="app_name">Dicoding Story App</string>
+    <string name="logo_app">Logo App</string>
+    <string name="moving_image">Moving Animation Images</string>
+    <string name="example_email">user@email.com</string>
+    <string name="example_pass">Your Password</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="logo_aplikasi">Logo Aplikasi</string>
-    <string name="belum_punya_akun">Belum Punya Akun ?</string>
-    <string name="daftar_disini">Daftar Disini</string>
-    <string name="login_sekarang">Login Sekarang</string>
-    <string name="kembali_ke_halaman_sebelumnya">kembali ke halaman sebelumnya</string>
-    <string name="logout_akun">Logout dari Akun</string>
-    <string name="wellcome">Selamat Datang,</string>
-    <string name="user_akun">{user}</string>
-    <string name="tambah_cerita">Tambahkan Cerita Baru</string>
-    <string name="gambar_menu">Gambar Menu</string>
-    <string name="registrasi">Registrasi</string>
-    <string name="desc_regis1">Daftarkan Dirimu Segera!</string>
-    <string name="desc_regis2">Lengkapi Data Dirimu Dibawah Ini</string>
-    <string name="nama_pengguna">Nama Pengguna</string>
-    <string name="bg_lingkaran">Background Lingkaran</string>
+    <string name="go_back">return to previous page</string>
     <string name="photo_item">Photo Item</string>
+    <string name="bg_circle">Circle Background</string>
+
+<!--    Register-->
+    <string name="fill_data">Please ill in the data correctly</string>
+    <string name="register">Registration</string>
+    <string name="desc_regis1">Register Yourself Immediately!</string>
+    <string name="desc_regis2">Filling Up Your Data Below</string>
+    <string name="username">Username</string>
+
+<!--    Login-->
+    <string name="login">Login</string>
+    <string name="login_now">Login Now</string>
+    <string name="desc_login1">Ready to Share Your Story?</string>
+    <string name="desc_login2">Enter your data first</string>
+    <string name="belum_punya_akun">Don\'t have an account yet?</string>
+    <string name="register_here">Register Here</string>
+
+<!--    Main Activity-->
+    <string name="hello">Hello, Welcome</string>
+    <string name="user">{user}</string>
+    <string name="add_story">Add A New Story</string>
+
+<!--    Add Story-->
+    <string name="add_a_story">Add A Story</string>
+    <string name="delete_image">Delete Image</string>
+    <string name="open_camera">Open A Camera</string>
+    <string name="open_gallery">Open A Gallery</string>
+    <string name="add_description">Add A Story Description :</string>
+    <string name="upload_story">Upload Story</string>
+
+<!--    Detail-->
     <string name="desc_item">Lorem Ipsum Dolor Sit Amet. Adis Picing dolor sir</string>
     <string name="date_time">2024-04-05T04:56:28.376Z</string>
     <string name="detail_story">Detail Story</string>
-    <string name="diunggah">Diunggah Oleh:</string>
-    <string name="deskripsi_story">Deskripsi Story:</string>
-    <string name="error_message">Something wrong with our server.\nPlease try again later.</string>
-    <string name="file_provider_authority">your.package.name.fileprovider</string>
+    <string name="uploader">Uploaded By:</string>
+    <string name="desc_story">Description Story:</string>
+
+
+<!--    Response-->
+    <string name="error_message">Something Wrong.\nPlease try again later.</string>
+    <string name="register_message">Congratulations! \nSuccess to Register</string>
+
+
 </resources>
