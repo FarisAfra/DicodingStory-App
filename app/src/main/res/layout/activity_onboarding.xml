@@ -12,6 +12,7 @@
 
     <ImageView
         android:id="@+id/logoMenu1"
+        android:contentDescription="@string/moving_image"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:src="@drawable/image_kurikulum_global"
@@ -36,6 +37,7 @@
 
     <TextView
         android:id="@+id/descMenu1"
+        android:contentDescription="@string/moving_image"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -49,6 +51,7 @@
 
     <ImageView
         android:id="@+id/logoMenu2"
+        android:contentDescription="@string/moving_image"
         android:layout_width="0dp"
         android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,6 +89,7 @@
 
     <ImageView
         android:id="@+id/logoMenu3"
+        android:contentDescription="@string/moving_image"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:src="@drawable/image_code_review"
@@ -123,6 +127,7 @@
 
     <ImageView
         android:id="@+id/logoMenu4"
+        android:contentDescription="@string/moving_image"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:src="@drawable/image_alumni_terpercaya"
@@ -234,7 +239,7 @@
         android:alpha="0"
         android:backgroundTint="@color/navi"
         android:paddingHorizontal="50dp"
-        android:text="@string/daftar"
+        android:text="@string/register"
         android:textColor="@color/white"
         style="@style/poppinsSemiBold"
         app:layout_constraintBottom_toTopOf="@+id/menu2"
@@ -242,6 +247,8 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:contentDescription="@string/logo_app"
+        android:transitionName="logo"
         android:layout_width="0dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

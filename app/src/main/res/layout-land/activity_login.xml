@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.LoginActivity">
+
+    <ImageView
+        android:id="@+id/ivLogin"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="48dp"
+        android:contentDescription="@string/moving_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/desc2"
+        app:srcCompat="@drawable/image_alumni_terpercaya" />
+
+    <TextView
+        android:id="@+id/tvLogin"
+        style="@style/poppinsExtraBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textSize="20sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="@+id/desc1"
+        app:layout_constraintStart_toStartOf="@+id/desc1"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+    <TextView
+        android:id="@+id/desc1"
+        style="@style/poppinsSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/desc_login1"
+        android:textSize="16sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/ivLogin"
+        app:layout_constraintStart_toStartOf="@+id/ivLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
+
+    <TextView
+        android:id="@+id/desc2"
+        style="@style/poppinsRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/desc_login2"
+        android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/desc1"
+        app:layout_constraintStart_toStartOf="@+id/desc1"
+        app:layout_constraintTop_toBottomOf="@+id/desc1" />
+
+    <com.farisafra.dicodingstory.ui.customview.EmailEditText
+        android:id="@+id/ed_login_email"
+        style="@style/poppinsLight"
+        android:layout_width="275dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext_background"
+        android:drawableStart="@drawable/ic_outline_email"
+        android:drawablePadding="8dp"
+        android:hint="@string/example_email"
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="10dp"
+        android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/tvEmail"
+        app:layout_constraintStart_toStartOf="@+id/tvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+    <com.farisafra.dicodingstory.ui.customview.PasswordEditText
+        android:id="@+id/ed_login_password"
+        style="@style/poppinsLight"
+        android:layout_width="275dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_edittext_background"
+        android:drawableStart="@drawable/ic_outline_password"
+        android:drawablePadding="8dp"
+        android:hint="@string/example_pass"
+        android:inputType="textPassword"
+        android:paddingHorizontal="10dp"
+        android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/tvPassword"
+        app:layout_constraintStart_toStartOf="@+id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/poppinsMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/email"
+        android:textSize="12sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivLogin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        style="@style/poppinsMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/password"
+        android:textSize="12sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/ed_login_email"
+        app:layout_constraintStart_toStartOf="@+id/ed_login_email"
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_email" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:transitionName="logo"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/logo_app"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logoapp2" />
+
+    <Button
+        android:id="@+id/BtnLogin"
+        style="@style/poppinsMedium"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/navi"
+        android:contentDescription="@string/login_now"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/ed_login_password"
+        app:layout_constraintStart_toStartOf="@+id/ed_login_password"
+        app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:contentDescription="@string/go_back"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_arrow_back_24" />
+
+    <TextView
+        android:id="@+id/tvTanyaAkun"
+        style="@style/poppinsRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/belum_punya_akun"
+        android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/BtnLogin"
+        app:layout_constraintStart_toStartOf="@+id/BtnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
+
+    <Button
+        android:id="@+id/btnDaftar"
+        style="@style/poppinsSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/transparent"
+        android:paddingHorizontal="5dp"
+        android:text="@string/register_here"
+        android:alpha="0"
+        tools:alpha="100"
+        app:layout_constraintEnd_toEndOf="@+id/tvTanyaAkun"
+        app:layout_constraintStart_toStartOf="@+id/tvTanyaAkun"
+        app:layout_constraintTop_toBottomOf="@+id/tvTanyaAkun" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

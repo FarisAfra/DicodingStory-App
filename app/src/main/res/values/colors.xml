@@ -5,4 +5,10 @@
     <color name="pink">#F06292</color>
     <color name="navi">#2D3D4F</color>
     <color name="transparent">#00111827</color>
+    <color name="redBtn">#FF5E2F</color>
+    <color name="brokenWhite">#F7F7F9</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
 </resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="file_provider_authority">your.package.name.fileprovider</string>
+
+    <!-- Semua Aktivitas-->
+    <string name="app_name">Dicoding Story App</string>
+    <string name="logo_app">Logo Aplikasi</string>
+    <string name="moving_image">Gambar Animasi Bergerak</string>
+    <string name="example_email">pengguna@email.com</string>
+    <string name="example_pass">Kata Sandi Anda</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="go_back">kembali ke halaman sebelumnya</string>
+    <string name="photo_item">Item Foto</string>
+    <string name="bg_circle">Latar Belakang Lingkaran</string>
+    <string name="permission">Permission request granted</string>
+
+    <!-- Daftar-->
+    <string name="fill_data">Harap isi data dengan benar</string>
+    <string name="registration">Pendaftaran</string>
+    <string name="desc_regis1">Daftarkan Diri Anda Segera!</string>
+    <string name="desc_regis2">Mengisi Data Anda Di Bawah</string>
+    <string name="username">Nama pengguna</string>
+    <string name="register">Daftar</string>
+
+    <!-- Masuk-->
+    <string name="login">Masuk</string>
+    <string name="login_now">Masuk Sekarang</string>
+    <string name="desc_login1">Siap Berbagi Kisah Anda?</string>
+    <string name="desc_login2">Masukkan data Anda terlebih dahulu</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="register_here">Daftar Disini</string>
+    <string name="login_success">Telah Berhasil Login</string>
+
+    <!-- Aktivitas Utama-->
+    <string name="hello">Halo, Selamat Datang</string>
+    <string name="user">{pengguna}</string>
+    <string name="add_story">Tambahkan Cerita Baru</string>
+    <string name="logout">Keluar dari Akun</string>
+    <string name="updateData">Data telah di updated</string>
+    <string name="backToExit">Tekan Sekali Lagi Untuk Keluar</string>
+
+    <!-- Tambah Cerita-->
+    <string name="add_a_story">Tambahkan Cerita</string>
+    <string name="delete_image">Hapus Gambar</string>
+    <string name="open_camera">Buka Kamera</string>
+    <string name="open_gallery">Buka Galeri</string>
+    <string name="add_description">Tambahkan Deskripsi Cerita :</string>
+    <string name="upload_story">Unggah Cerita</string>
+    <string name="pick_image_desc">Tolong Pilih Gambar dan Isi Deskripsi Dahulu</string>
+    <string name="select_image">Tolong Pilih Gambar Dahulu</string>
+    <string name="fill_desc">Tolong Isi Deskripsi Dahulu</string>
+
+    <!-- Detail-->
+    <string name="desc_item">Lorem Ipsum Dolor Duduk Amet. Adis Picing dolor pak</string>
+    <string name="date_time">05-04-2024T04:56:28.376Z</string>
+    <string name="detail_story">Kisah Detil</string>
+    <string name="uploader">Diunggah Oleh:</string>
+    <string name="desc_story">Deskripsi Cerita:</string>
+
+    <!--Onboarding-->
+    <string name="title_menu_1">Kurikulum Standar Industri Global</string>
+    <string name="title_menu_2">Pembelajaran Fleksibel Sesuai Jadwal Anda</string>
+    <string name="title_menu_3">Tinjauan Kode dari Pakar Pengembang</string>
+    <string name="title_menu_4">Alumni Tepercaya di Berbagai Perusahaan</string>
+    <string name="desc_menu_1">Kurikulum dikembangkan bersama perusahaan dunia dan pemilik teknologi sesuai dengan kebutuhan industri terkini.</string>
+    <string name="desc_menu_2">Belajar kapan saja, di mana saja, secara mandiri. Bebas memilih kelas sesuai minat belajar. Akses seumur hidup ke kelas dan forum diskusi setelah lulus.</string>
+    <string name="desc_menu_3">Validasi keterampilan Anda melalui Tinjauan Kode Profesional 1 lawan 1 yang diberikan langsung oleh Pakar Pengembang.</string>
+    <string name="desc_menu_4">Sertifikat yang membuktikan pengetahuan dasar serta keterampilan nyata yang diinginkan perusahaan global.</string>
+    <string name="learn_now">Pelajari Sekarang</string>
+
+    <!--    Profile-->
+    <string name="add_a_new_story">Buat Cerita Baru</string>
+    <string name="switch_language">Ganti Bahasa</string>
+    <string name="switch_theme">Ganti Tema</string>
+    <string name="coming_soon">Coming Soon Feature, Stay Tune!!!</string>
+    <string name="profile_user">Profile Pengguna</string>
+    <string name="example_userId">user-QLP7NRQGxdT9ZFAd</string>
+    <string name="edit_photo_profile">Edit Foto Profil</string>
+
+    <!--    About-->
+    <string name="about_app_title">Tentang Aplikasi</string>
+    <string name="about_app">Dicoding Story App merupakan sebuah tugas submission course dari Dicoding untuk membuat suatu proyek aplikasi dengan tema Story App. Aplikasi ini menampilkan daftar cerita dari teman-teman yang sedang belajar dan lulus dari Dicoding.</string>
+    <string name="developed_by_title">Dikembangkan Oleh</string>
+    <string name="developed_by">Faris Afra Mu’taz | A001D4KY3724 | MD-44 | \n Mobile Development Cohort at Bangkit Academy 2024 Batch 1 </string>
+    <string name="about_developer_title">Tentang Pengembang</string>
+    <string name="about_developer">Saya seorang mahasiswi Sekolah Vokasi IPB University jurusan Teknologi Rekayasa Perangkat Lunak yang memiliki passion dalam belajar dan mengembangkan keterampilan. Memiliki minat dan keahlian dalam Pengembangan Web, Aplikasi Seluler, dan Multimedia/Editing.</string>
+    <string name="social_media_title">Social Media</string>
+    <string name="social_media">Github: FarisAfra | LinkedIn: Faris-Afra \n Instagram: @Faris_Afra</string>
+
+    <!-- Respon-->
+    <string name="error_message">Ada yang Salah.\nSilakan coba lagi nanti.</string>
+    <string name="register_message">Selamat! \nSukses Mendaftar</string>
+
+    <!--    Widget-->
+    <string name="appwidget_text">Dicoding Story App</string>
+    <string name="add_widget">Tambah widget</string>
+    <string name="app_widget_description">Ini adalah deskripsi widget</string>
+    <string name="widget_content">Konten Widget</string>
+
+</resources>

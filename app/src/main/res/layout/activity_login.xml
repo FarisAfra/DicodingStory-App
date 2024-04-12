@@ -27,6 +27,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/login"
         android:textSize="20sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLogin" />
@@ -39,6 +41,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/desc_login1"
         android:textSize="16sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
@@ -50,6 +54,8 @@
         android:text="@string/desc_login2"
         style="@style/poppinsRegular"
         android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/desc1" />
@@ -69,6 +75,8 @@
         android:inputType="textEmailAddress"
         android:paddingHorizontal="10dp"
         android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
@@ -88,6 +96,8 @@
         android:inputType="textPassword"
         android:paddingHorizontal="10dp"
         android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
@@ -100,6 +110,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/email"
         android:textSize="12sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/desc2" />
@@ -112,12 +124,15 @@
         android:layout_marginTop="8dp"
         android:text="@string/password"
         android:textSize="12sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_login_email" />
 
     <ImageView
         android:id="@+id/ivLogo"
+        android:transitionName="logo"
         android:contentDescription="@string/logo_app"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
@@ -136,6 +151,8 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/navi"
         android:text="@string/login"
+        android:alpha="0"
+        tools:alpha="100"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,6 +178,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/belum_punya_akun"
         android:textSize="14sp"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="@+id/BtnLogin"
         app:layout_constraintStart_toStartOf="@+id/BtnLogin"
         app:layout_constraintTop_toBottomOf="@+id/BtnLogin" />
@@ -173,6 +192,8 @@
         android:backgroundTint="@color/transparent"
         android:paddingHorizontal="5dp"
         android:text="@string/register_here"
+        android:alpha="0"
+        tools:alpha="100"
         app:layout_constraintEnd_toEndOf="@+id/tvTanyaAkun"
         app:layout_constraintStart_toStartOf="@+id/tvTanyaAkun"
         app:layout_constraintTop_toBottomOf="@+id/tvTanyaAkun" />

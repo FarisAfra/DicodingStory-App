@@ -9,6 +9,7 @@ import android.os.Looper
 import android.transition.TransitionManager
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.farisafra.dicodingstory.R
+import com.farisafra.dicodingstory.data.preferences.LoginPreference
 
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         val motionLayout = findViewById<MotionLayout>(R.id.splashMotionLayout)
-        val sharedPreferences = getSharedPreferences("login_prefs", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val token = sharedPreferences.getString("token", null)
 
         Handler(Looper.getMainLooper()).postDelayed({

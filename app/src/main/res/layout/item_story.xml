@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/photo_item"
+            android:transitionName="photo"
             android:id="@+id/iv_item_photo"
             android:background="@drawable/rounded_background2" />
 
@@ -32,17 +33,23 @@
             <TextView
                 android:id="@+id/tv_item_name"
                 style="@style/poppinsExtraBold"
-                android:layout_width="wrap_content"
+                android:transitionName="username"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/nama_pengguna"
+                android:layout_marginEnd="8dp"
+                android:text="@string/username"
                 android:textSize="16sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toStartOf="@+id/tvCreatAt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvDesc"
+                android:transitionName="description"
                 style="@style/poppinsRegular"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,6 +65,7 @@
 
             <TextView
                 android:id="@+id/tvCreatAt"
+                android:transitionName="create"
                 style="@style/poppinsLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

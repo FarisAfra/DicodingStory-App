@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".ui.MainActivity">
+
     <ImageButton
-        android:id="@+id/action_logout"
-        android:contentDescription="@string/logout_akun"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnProfil"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="24dp"
+        android:backgroundTint="@color/transparent"
+        android:contentDescription="@string/logout"
         app:layout_constraintBottom_toBottomOf="@+id/tvWelcome"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/transparent"
         app:layout_constraintTop_toTopOf="@+id/tvNameApp"
-        app:srcCompat="@drawable/outline_logout" />
+        app:srcCompat="@drawable/profil" />
 
     <TextView
         android:id="@+id/tvNameApp"
@@ -43,12 +44,16 @@
     <TextView
         android:id="@+id/tvUsername"
         style="@style/poppinsSemiBold"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/user"
         android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@+id/tvWelcome"
+        app:layout_constraintEnd_toStartOf="@+id/btnProfil"
         app:layout_constraintStart_toEndOf="@+id/tvWelcome"
         app:layout_constraintTop_toTopOf="@+id/tvWelcome" />
 

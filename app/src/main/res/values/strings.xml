@@ -1,19 +1,7 @@
 <resources>
-    <string name="title_menu_1">Kurikulum Standar Industri Global</string>
-    <string name="title_menu_2">Belajar Fleksibel Sesuai Jadwal Anda</string>
-    <string name="title_menu_3">Code Review dari Developer Expert</string>
-    <string name="title_menu_4">Alumni Terpercaya di Berbagai Perusahaan</string>
-    <string name="desc_menu_1">Kurikulum dikembangkan bersama perusahaan dan pemilik teknologi dunia sesuai kebutuhan industri terkini.</string>
-    <string name="desc_menu_2">Belajar kapan pun, di mana pun, secara mandiri. Bebas memilih kelas sesuai minat belajar. Akses seumur hidup ke kelas dan forum diskusi setelah lulus.</string>
-    <string name="desc_menu_3">Validasi skill Anda melalui 1-on-1 Professional Code Review yang diberikan langsung oleh Developer Expert.</string>
-    <string name="desc_menu_4">Sertifikat yang membuktikan pengetahuan fundamental beserta keterampilan nyata yang diinginkan perusahaan global.</string>
-    <string name="learn_now">Belajar Sekarang</string>
-    <string name="daftar">Daftar</string>
-    <string name="logout_akun">Logout dari Akun</string>
-    <string name="gambar_menu">Gambar Menu</string>
     <string name="file_provider_authority">your.package.name.fileprovider</string>
 
-<!--    All Activity-->
+    <!--    All Activity-->
     <string name="app_name">Dicoding Story App</string>
     <string name="logo_app">Logo App</string>
     <string name="moving_image">Moving Animation Images</string>
@@ -24,46 +12,89 @@
     <string name="go_back">return to previous page</string>
     <string name="photo_item">Photo Item</string>
     <string name="bg_circle">Circle Background</string>
+    <string name="permission">Permission request granted</string>
 
-<!--    Register-->
+    <!--    Register-->
     <string name="fill_data">Please ill in the data correctly</string>
-    <string name="register">Registration</string>
+    <string name="registration">Registration</string>
     <string name="desc_regis1">Register Yourself Immediately!</string>
     <string name="desc_regis2">Filling Up Your Data Below</string>
     <string name="username">Username</string>
+    <string name="register">Register</string>
 
-<!--    Login-->
+    <!--    Login-->
     <string name="login">Login</string>
     <string name="login_now">Login Now</string>
     <string name="desc_login1">Ready to Share Your Story?</string>
     <string name="desc_login2">Enter your data first</string>
     <string name="belum_punya_akun">Don\'t have an account yet?</string>
     <string name="register_here">Register Here</string>
+    <string name="login_success">Login Successfully</string>
 
-<!--    Main Activity-->
+    <!--    Main Activity-->
     <string name="hello">Hello, Welcome</string>
     <string name="user">{user}</string>
     <string name="add_story">Add A New Story</string>
+    <string name="logout">Logout from Account</string>
+    <string name="updateData">Data has been Updated</string>
+    <string name="backToExit">Press Again to Exit</string>
 
-<!--    Add Story-->
+    <!--    Add Story-->
     <string name="add_a_story">Add A Story</string>
     <string name="delete_image">Delete Image</string>
     <string name="open_camera">Open A Camera</string>
     <string name="open_gallery">Open A Gallery</string>
     <string name="add_description">Add A Story Description :</string>
     <string name="upload_story">Upload Story</string>
+    <string name="pick_image_desc">Please select an image and fill in the description</string>
+    <string name="select_image">Please select an image first</string>
+    <string name="fill_desc">Please fill in the description first</string>
 
-<!--    Detail-->
+    <!--    Detail-->
     <string name="desc_item">Lorem Ipsum Dolor Sit Amet. Adis Picing dolor sir</string>
     <string name="date_time">2024-04-05T04:56:28.376Z</string>
     <string name="detail_story">Detail Story</string>
     <string name="uploader">Uploaded By:</string>
     <string name="desc_story">Description Story:</string>
 
+    <!--Onboarding-->
+    <string name="title_menu_1">Global Industry Standards Curriculum</string>
+    <string name="title_menu_2">Flexible Learning to Fit Your Schedule</string>
+    <string name="title_menu_3">Code Review from Developer Expert</string>
+    <string name="title_menu_4">Trusted Alumni in Various Companies</string>
+    <string name="desc_menu_1">The curriculum was developed with world companies and technology owners according to the latest industry needs.</string>
+    <string name="desc_menu_2">Learn anytime, anywhere, independently. Free to choose classes according to learning interests. Lifetime access to classes and discussion forums after graduation.</string>
+    <string name="desc_menu_3">Validate your skills through 1-on-1 Professional Code Review provided directly by a Developer Expert.</string>
+    <string name="desc_menu_4">A certificate that proves fundamental knowledge along with real skills that global companies desire.</string>
+    <string name="learn_now">Learn Now</string>
 
-<!--    Response-->
+    <!--    Profile-->
+    <string name="add_a_new_story">Add A New Story</string>
+    <string name="switch_language">Switch Language</string>
+    <string name="switch_theme">Switch Theme</string>
+    <string name="coming_soon">Coming Soon Feature, Stay Tune!!!</string>
+    <string name="profile_user">Profile User</string>
+    <string name="example_userId">user-QLP7NRQGxdT9ZFAd</string>
+    <string name="edit_photo_profile">Edit Photo Profile</string>
+
+    <!--    About-->
+    <string name="about_app_title">About App</string>
+    <string name="about_app">Dicoding Story App is a course submission assignment from Dicoding to create an application project with a Story App theme. This application displays a list of stories from friends who are studying and graduating from Dicoding.</string>
+    <string name="developed_by_title">Developed By</string>
+    <string name="developed_by">Faris Afra Mu’taz | A001D4KY3724 | MD-44 | \n Mobile Development Cohort at Bangkit Academy 2024 Batch 1 </string>
+    <string name="about_developer_title">About Developer</string>
+    <string name="about_developer">I am a student at IPB University Vocational School majoring in Software Engineering Technology who is passionate about learning and developing skills. Have interest and expertise in Web Development, Mobile App, and Multimedia / Editing.</string>
+    <string name="social_media_title">Social Media</string>
+    <string name="social_media">Github: FarisAfra | LinkedIn: Faris-Afra \n Instagram: @Faris_Afra</string>
+
+    <!--    Response-->
     <string name="error_message">Something Wrong.\nPlease try again later.</string>
     <string name="register_message">Congratulations! \nSuccess to Register</string>
 
+    <!--    Widget-->
+    <string name="appwidget_text">Dicoding Story App</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="widget_content">Widget Content</string>
 
 </resources>

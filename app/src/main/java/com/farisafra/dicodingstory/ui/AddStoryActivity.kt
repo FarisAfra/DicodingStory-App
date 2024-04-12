@@ -2,7 +2,6 @@ package com.farisafra.dicodingstory.ui
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.farisafra.dicodingstory.R
-import com.farisafra.dicodingstory.data.getTempUriFromFile
+import com.farisafra.dicodingstory.data.getImageUri
 import com.farisafra.dicodingstory.data.reduceFileImage
 import com.farisafra.dicodingstory.data.uriToFile
 import com.farisafra.dicodingstory.data.viewmodel.AddStoryViewModel
@@ -42,9 +41,9 @@ class AddStoryActivity : AppCompatActivity() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.permission, Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.permission, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -66,11 +65,12 @@ class AddStoryActivity : AppCompatActivity() {
         progressBar = binding.progressBar
 
         setupViewModel()
-        openCamera()
+        startCamera()
         openGallery()
         goToUpload()
         deleteImage()
         btnBack()
+
     }
 
     private fun setupViewModel() {
@@ -81,11 +81,11 @@ class AddStoryActivity : AppCompatActivity() {
         binding.buttonAdd.setOnClickListener {
             val desc = binding.edAddDescription.text.toString().trim()
             if (currentImageUri == null && desc.isEmpty()) {
-                showToast("Silakan pilih gambar dan isi deskripsi terlebih dahulu")
+                Toast.makeText(this, R.string.pick_image_desc, Toast.LENGTH_SHORT).show()
             } else if (desc.isEmpty()) {
-                showToast("Silakan isi deskripsi terlebih dahulu")
+                Toast.makeText(this, R.string.select_image, Toast.LENGTH_SHORT).show()
             } else if (currentImageUri == null ) {
-                showToast("Silakan pilih gambar terlebih dahulu")
+                Toast.makeText(this, R.string.fill_desc, Toast.LENGTH_SHORT).show()
             } else {
                 createStory(desc)
                 val intent = Intent(this, MainActivity::class.java)
@@ -135,14 +135,29 @@ class AddStoryActivity : AppCompatActivity() {
         return description.toRequestBody("text/plain".toMediaType())
     }
 
-    private fun openCamera() {
+
+    private fun startCamera() {
         binding.btnCamera.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (takePictureIntent.resolveActivity(packageManager) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-            }
+            currentImageUri = getImageUri(this)
+            launcherIntentCamera.launch(currentImageUri)
         }
     }
+
+    private val launcherIntentCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        if (isSuccess) {
+            showImage()
+        }
+    }
+
+    private fun showImage() {
+        currentImageUri?.let {
+            Log.d("Image URI", "showImage: $it")
+            binding.ivStoryPhoto.setImageURI(it)
+        }
+    }
+
 
     private fun errorResponse() {
         ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
@@ -165,14 +180,6 @@ class AddStoryActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             when (requestCode) {
-                REQUEST_IMAGE_CAPTURE -> {
-                    val imageBitmap = data?.extras?.get("data") as Bitmap
-                    binding.ivStoryPhoto.setImageBitmap(imageBitmap)
-                    val tempUri = getTempUriFromFile(this, imageBitmap)
-                    currentImageUri = tempUri
-                    Glide.with(this).load(tempUri).into(binding.ivStoryPhoto)
-                    showDeleteBtn()
-                }
                 REQUEST_PICK_IMAGE -> {
                     data?.data?.let { uri ->
                         currentImageUri = uri
@@ -195,11 +202,6 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(message: String?) {
-        message?.let {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
-    }
     private fun showDeleteBtn() {
         binding.btnDeleteImage.visibility = View.VISIBLE
     }
@@ -211,8 +213,7 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val REQUEST_IMAGE_CAPTURE = 1
-        private const val REQUEST_PICK_IMAGE = 2
+        private const val REQUEST_PICK_IMAGE = 1
         private const val REQUIRED_PERMISSION = android.Manifest.permission.CAMERA
     }
 }

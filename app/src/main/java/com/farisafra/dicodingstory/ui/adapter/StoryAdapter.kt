@@ -1,14 +1,21 @@
 package com.farisafra.dicodingstory.ui.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.farisafra.dicodingstory.data.response.story.Story
 import com.farisafra.dicodingstory.databinding.ItemStoryBinding
 import com.farisafra.dicodingstory.ui.DetailActivity
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
+import androidx.core.util.Pair
 
 class StoryAdapter(private val stories: ArrayList<Story>)
     : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
@@ -18,21 +25,31 @@ class StoryAdapter(private val stories: ArrayList<Story>)
             binding.root.setOnClickListener(this)
         }
 
+
         override fun onClick(v: View?) {
             val context = binding.root.context
             val intent = Intent(context, DetailActivity::class.java)
 
-            // Mengambil posisi item yang diklik
+            val ivPhoto = binding.ivItemPhoto
+            val tvName = binding.tvItemName
+            val tvDesc = binding.tvDesc
+            val tvCreate = binding.tvCreatAt
+
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    itemView.context as Activity,
+                    Pair(ivPhoto, "photo"),
+                    Pair(tvName, "username"),
+                    Pair(tvDesc, "description"),
+                    Pair(tvCreate, "create"),
+                )
+
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                // Mengambil data dari item yang diklik
                 val story = stories[position]
 
-                // Menambahkan objek Story sebagai ekstra pada Intent
                 intent.putExtra("EXTRA_STORY", story)
-
-                // Memulai DetailActivity dengan Intent yang telah diberi data ekstra
-                context.startActivity(intent)
+                itemView.context.startActivity(intent, optionsCompat.toBundle())
             }
         }
 
@@ -41,7 +58,22 @@ class StoryAdapter(private val stories: ArrayList<Story>)
             binding.apply {
                 tvItemName.text = story.name
                 tvDesc.text = story.description
-                tvCreatAt.text = story.createdAt
+                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                val date = simpleDateFormat.parse(story.createdAt)
+
+                val timeZone = TimeZone.getTimeZone("Asia/Jakarta")
+
+                val calendar = Calendar.getInstance()
+                calendar.setTime(date)
+                calendar.add(Calendar.HOUR_OF_DAY, 7)
+
+                val adjustedTime = calendar.time
+
+                val formattedAdjustedTime = SimpleDateFormat("dd MMMM yyyy 'at' HH:mm", Locale.ENGLISH).apply {
+                    setTimeZone(timeZone)
+                }.format(adjustedTime)
+
+                tvCreatAt.text = formattedAdjustedTime
 
                 Glide.with(itemView.context)
                     .load(story.photoUrl)
@@ -69,7 +101,7 @@ class StoryAdapter(private val stories: ArrayList<Story>)
     fun submitList(newStories: List<Story>) {
         stories.clear()
         stories.addAll(newStories)
-        notifyDataSetChanged() // Or use DiffUtil for better performance
+        notifyDataSetChanged()
     }
 }
 

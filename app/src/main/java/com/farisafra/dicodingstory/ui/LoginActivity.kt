@@ -1,6 +1,8 @@
 package com.farisafra.dicodingstory.ui
 
 import LoginViewModel
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +18,7 @@ import com.farisafra.dicodingstory.databinding.ActivityLoginBinding
 import com.farisafra.dicodingstory.ui.customview.ResponseView
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var progressBar: ProgressBar
     private lateinit var vmFactory: ViewModelFactory
     private val loginViewModel: LoginViewModel by viewModels { vmFactory }
@@ -33,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
         backActivity()
         moveToRegister()
         setupViewModel()
+        playAnimation()
     }
 
     private fun setupViewModel() {
@@ -45,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.edLoginPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty() || password.length < 8 || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                showToast("Tolong Isi Data Sesuai dengan ketentuan")
+                Toast.makeText(this, R.string.fill_data, Toast.LENGTH_SHORT).show()
             } else {
                 login(email, password)
             }
@@ -74,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun successLoginHandler(loginResponse: LoginResponse) {
         saveData(loginResponse)
-        showToast("Telah Berhasil Login")
+        Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show()
         moveToMainActivity()
     }
 
@@ -105,7 +108,31 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.ivLogin, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        val tvLogin = ObjectAnimator.ofFloat(binding.tvLogin, View.ALPHA, 1f).setDuration(300)
+        val descLogin1 = ObjectAnimator.ofFloat(binding.desc1, View.ALPHA, 1f).setDuration(300)
+        val descLogin2 = ObjectAnimator.ofFloat(binding.desc2, View.ALPHA, 1f).setDuration(300)
+        val tvEmail = ObjectAnimator.ofFloat(binding.tvEmail, View.ALPHA, 1f).setDuration(300)
+        val edEmail = ObjectAnimator.ofFloat(binding.edLoginEmail, View.ALPHA, 1f).setDuration(300)
+        val tvPass = ObjectAnimator.ofFloat(binding.tvPassword, View.ALPHA, 1f).setDuration(300)
+        val edPass = ObjectAnimator.ofFloat(binding.edLoginPassword, View.ALPHA, 1f).setDuration(300)
+        val btnLogin = ObjectAnimator.ofFloat(binding.BtnLogin, View.ALPHA, 1f).setDuration(300)
+        val tvTanya = ObjectAnimator.ofFloat(binding.tvTanyaAkun, View.ALPHA, 1f).setDuration(300)
+        val btnDaftar = ObjectAnimator.ofFloat(binding.btnDaftar, View.ALPHA, 1f).setDuration(300)
+
+        val together = AnimatorSet().apply {
+            playTogether(btnLogin,tvTanya,btnDaftar)
+        }
+
+        AnimatorSet().apply {
+            playSequentially(tvLogin,descLogin1,descLogin2,tvEmail,edEmail,tvPass,edPass,together)
+            start()
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.farisafra.dicodingstory.data.retrofit
 
-import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +12,7 @@ object ApiClient {
         val authInterceptor = Interceptor { chain ->
             val req = chain.request()
             val requestHeaders = req.newBuilder()
-                .addHeader("Authorization", "Bearer $token")
+//                .addHeader("Authorization", "Bearer $token")
                 .build()
             chain.proceed(requestHeaders)
         }

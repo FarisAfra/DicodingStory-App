@@ -10,17 +10,19 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.farisafra.dicodingstory.R
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import com.farisafra.dicodingstory.data.viewmodel.StoriesViewModel
 import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityMainBinding
 import com.farisafra.dicodingstory.ui.adapter.StoryAdapter
+import com.farisafra.dicodingstory.ui.customview.ResponseView
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
-    lateinit var loginPreference: LoginPreference // Tambahkan ini
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var loginPreference: LoginPreference
     private lateinit var storyAdapter: StoryAdapter
-    lateinit var vmFactory: ViewModelFactory
+    private lateinit var vmFactory: ViewModelFactory
     private val storiesViewModel: StoriesViewModel by viewModels { vmFactory }
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
@@ -30,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         storyAdapter = StoryAdapter(ArrayList())
-
-
 
         setupViewModel()
         getusername()
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     is com.farisafra.dicodingstory.data.repository.Result.Error -> {
                         binding?.progressBar?.visibility = View.GONE
-                        showToast("error")
+                        errorResponse()
                     }
                 }
             }
@@ -81,9 +81,9 @@ class MainActivity : AppCompatActivity() {
         val userData = loginPreference.getLogin()
         binding.tvUsername.text = userData.userId
 
-        binding.actionLogout.setOnClickListener {
-            loginPreference.clearLogin()
-            moveToLoginOrOnBoarding()
+        binding.btnProfil.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -91,15 +91,8 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
             fetchStories()
-            showToast("Data Telah di Update")
+            Toast.makeText(this, R.string.updateData, Toast.LENGTH_SHORT).show()
         }
-    }
-
-
-    private fun moveToLoginOrOnBoarding() {
-        val intent = Intent(this, OnBoardingActivity::class.java)
-        startActivity(intent)
-        finish() // Selesai dengan MainActivity setelah logout
     }
 
     private fun moveToAddStory() {
@@ -117,15 +110,16 @@ class MainActivity : AppCompatActivity() {
                 finishAffinity()
             } else {
                 backPressedOnce = true
-                showToast("Tekan sekali lagi untuk keluar")
-                Handler().postDelayed({ backPressedOnce = false }, 2000) // Setelah 2 detik, reset backPressedOnce menjadi false
+                Toast.makeText(this, R.string.backToExit, Toast.LENGTH_SHORT).show()
+                Handler().postDelayed({ backPressedOnce = false }, 2000)
             }
             return true
         }
         return super.onKeyDown(keyCode, event)
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun errorResponse() {
+        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
+        refreshPage()
     }
 }

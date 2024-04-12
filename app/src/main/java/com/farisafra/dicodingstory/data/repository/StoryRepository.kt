@@ -62,6 +62,7 @@ class StoryRepository(private val preference: LoginPreference, private val apiSe
         emit(Result.Loading)
         try {
             val response = apiService.addStory(
+                token = "Bearer ${preference.getLogin().token}",
                 file = imageFile,
                 description = desc,
             )
@@ -79,6 +80,7 @@ class StoryRepository(private val preference: LoginPreference, private val apiSe
         emit(Result.Loading)
         try {
             val response = apiService.getAllStories(
+                token = "Bearer ${preference.getLogin().token}",
                 page = 1,
                 size = 100,
                 location = 0

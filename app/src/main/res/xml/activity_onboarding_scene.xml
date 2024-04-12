@@ -92,11 +92,11 @@
             android:layout_height="75dp"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="32dp" />
         <Constraint
             android:id="@+id/logoMenu1"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.4"
             motion:layout_constraintTop_toTopOf="parent"
@@ -190,7 +190,7 @@
         <Constraint
             android:id="@+id/logoMenu2"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.4"
             motion:layout_constraintTop_toTopOf="parent"
@@ -291,7 +291,7 @@
         <Constraint
             android:id="@+id/logoMenu3"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.4"
             motion:layout_constraintTop_toTopOf="parent"
@@ -394,8 +394,24 @@
             android:id="@+id/imageView"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="0dp" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/logoMenu3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/logoMenu3"
+            motion:layout_constraintStart_toStartOf="@+id/logoMenu3"
+            android:layout_marginTop="0dp"
+            android:id="@+id/titleMenu3" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/titleMenu3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/titleMenu3"
+            motion:layout_constraintStart_toStartOf="@+id/titleMenu3"
+            android:layout_marginTop="0dp"
+            android:id="@+id/descMenu3" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu2"
@@ -416,7 +432,7 @@
         <Constraint
             android:id="@+id/logoMenu4"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="150dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintVertical_bias="0.4"
             motion:layout_constraintTop_toTopOf="parent"
@@ -470,10 +486,9 @@
             android:id="@+id/BtnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="98dp"
             motion:layout_constraintBottom_toTopOf="@+id/menu2"
-            android:alpha="0"
-            android:layout_marginStart="48dp"
+            android:layout_marginStart="32dp"
             motion:layout_constraintStart_toStartOf="parent">
             <CustomAttribute
                 motion:attributeName="alpha"
@@ -484,13 +499,29 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             motion:layout_constraintBottom_toTopOf="@+id/menu2"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="98dp"
             android:id="@+id/BtnRegister"
-            android:layout_marginEnd="48dp" >
+            android:layout_marginEnd="32dp" >
             <CustomAttribute
                 motion:attributeName="alpha"
                 motion:customFloatValue="1" />
         </Constraint>
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/logoMenu4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/logoMenu4"
+            motion:layout_constraintStart_toStartOf="@+id/logoMenu4"
+            android:layout_marginTop="0dp"
+            android:id="@+id/titleMenu4" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/titleMenu4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@+id/titleMenu4"
+            motion:layout_constraintStart_toStartOf="@+id/titleMenu4"
+            android:layout_marginTop="0dp"
+            android:id="@+id/descMenu4" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu3"
