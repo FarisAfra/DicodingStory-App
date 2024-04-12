@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,211 +8,221 @@
     android:background="@color/white"
     tools:context=".ui.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/ivRegister"
-        android:contentDescription="@string/moving_image"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_kurikulum_global" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvRegister"
-        style="@style/poppinsExtraBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/registration"
-        android:textSize="20sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRegister" />
+        <ImageView
+            android:id="@+id/ivRegister"
+            android:contentDescription="@string/moving_image"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/image_kurikulum_global" />
 
-    <TextView
-        android:id="@+id/desc1"
-        style="@style/poppinsSemiBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/desc_regis1"
-        android:textSize="16sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRegister" />
+        <TextView
+            android:id="@+id/tvRegister"
+            style="@style/poppinsExtraBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/registration"
+            android:textSize="20sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivRegister" />
 
-    <TextView
-        android:id="@+id/desc2"
-        style="@style/poppinsRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/desc_regis2"
-        android:textSize="14sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc1" />
+        <TextView
+            android:id="@+id/desc1"
+            style="@style/poppinsSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/desc_regis1"
+            android:textSize="16sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRegister" />
 
-    <EditText
-        android:id="@+id/ed_register_name"
-        style="@style/poppinsLight"
-        android:layout_width="275dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:inputType="text"
-        android:textSize="14sp"
-        android:alpha="0"
-        tools:alpha="100"
-        android:paddingHorizontal="10dp"
-        android:drawableStart="@drawable/baseline_account_circle_24"
-        android:hint="@string/username"
-        android:autofillHints="name"
-        android:drawablePadding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        <TextView
+            android:id="@+id/desc2"
+            style="@style/poppinsRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/desc_regis2"
+            android:textSize="14sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc1" />
 
-    <com.farisafra.dicodingstory.ui.customview.EmailEditText
-        android:id="@+id/ed_register_email"
-        style="@style/poppinsLight"
-        android:layout_width="275dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:drawableStart="@drawable/ic_outline_email"
-        android:drawablePadding="8dp"
-        android:hint="@string/example_email"
-        android:alpha="0"
-        tools:alpha="100"
-        android:inputType="textEmailAddress"
-        android:paddingHorizontal="10dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+        <EditText
+            android:id="@+id/ed_register_name"
+            style="@style/poppinsLight"
+            android:layout_width="275dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_edittext_background"
+            android:inputType="text"
+            android:textSize="14sp"
+            android:alpha="0"
+            tools:alpha="100"
+            android:paddingHorizontal="10dp"
+            android:drawableStart="@drawable/baseline_account_circle_24"
+            android:hint="@string/username"
+            android:autofillHints="name"
+            android:drawablePadding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
-    <com.farisafra.dicodingstory.ui.customview.PasswordEditText
-        android:id="@+id/ed_register_password"
-        style="@style/poppinsLight"
-        android:layout_width="275dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/rounded_edittext_background"
-        android:drawableStart="@drawable/ic_outline_password"
-        android:drawablePadding="8dp"
-        android:hint="@string/example_pass"
-        android:inputType="textPassword"
-        android:paddingHorizontal="10dp"
-        android:textSize="14sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+        <com.farisafra.dicodingstory.ui.customview.EmailEditText
+            android:id="@+id/ed_register_email"
+            style="@style/poppinsLight"
+            android:layout_width="275dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/rounded_edittext_background"
+            android:drawableStart="@drawable/ic_outline_email"
+            android:drawablePadding="8dp"
+            android:hint="@string/example_email"
+            android:alpha="0"
+            tools:alpha="100"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-    <TextView
-        android:id="@+id/tvName"
-        style="@style/poppinsMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/username"
-        android:textSize="12sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc2" />
+        <com.farisafra.dicodingstory.ui.customview.PasswordEditText
+            android:id="@+id/ed_register_password"
+            style="@style/poppinsLight"
+            android:layout_width="275dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/rounded_edittext_background"
+            android:drawableStart="@drawable/ic_outline_password"
+            android:drawablePadding="8dp"
+            android:hint="@string/example_pass"
+            android:inputType="textPassword"
+            android:paddingHorizontal="10dp"
+            android:textSize="14sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
 
-    <TextView
-        android:id="@+id/tvEmail"
-        style="@style/poppinsMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/email"
-        android:textSize="12sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_name" />
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/poppinsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/username"
+            android:textSize="12sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc2" />
 
-    <TextView
-        android:id="@+id/tvPassword"
-        style="@style/poppinsMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/password"
-        android:textSize="12sp"
-        android:alpha="0"
-        tools:alpha="100"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_email" />
+        <TextView
+            android:id="@+id/tvEmail"
+            style="@style/poppinsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/email"
+            android:textSize="12sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_register_name" />
 
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:contentDescription="@string/logo_app"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:transitionName="logo"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logoapp2" />
+        <TextView
+            android:id="@+id/tvPassword"
+            style="@style/poppinsMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/password"
+            android:textSize="12sp"
+            android:alpha="0"
+            tools:alpha="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_register_email" />
 
-    <Button
-        android:id="@+id/BtnRegister"
-        style="@style/poppinsMedium"
-        android:layout_width="275dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/navi"
-        android:text="@string/register"
-        android:alpha="0"
-        tools:alpha="100"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_register_password" />
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/logo_app"
+            android:transitionName="logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BtnRegister"
+            app:srcCompat="@drawable/logoapp2" />
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:contentDescription="@string/go_back"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_arrow_back_24" />
+        <Button
+            android:id="@+id/BtnRegister"
+            style="@style/poppinsMedium"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/navi"
+            android:text="@string/register"
+            android:alpha="0"
+            tools:alpha="100"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ed_register_password" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:contentDescription="@string/go_back"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_arrow_back_24" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
