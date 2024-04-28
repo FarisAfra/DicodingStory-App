@@ -22,6 +22,11 @@ import com.farisafra.dicodingstory.data.viewmodel.AddStoryViewModel
 import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityAddStoryBinding
 import com.farisafra.dicodingstory.ui.customview.ResponseView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -35,6 +40,9 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var vmFactory: ViewModelFactory
     private val addStoryViewModel: AddStoryViewModel by viewModels { vmFactory }
     private lateinit var progressBar: ProgressBar
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var lat: Double = 0.0
+    private var lon: Double = 0.0
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -42,6 +50,7 @@ class AddStoryActivity : AppCompatActivity() {
         ) { isGranted: Boolean ->
             if (isGranted) {
                 Toast.makeText(this, R.string.permission, Toast.LENGTH_LONG).show()
+                getDeviceLocation()
             } else {
                 Toast.makeText(this, R.string.permission, Toast.LENGTH_LONG).show()
             }
@@ -62,6 +71,8 @@ class AddStoryActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         progressBar = binding.progressBar
 
         setupViewModel()
@@ -80,17 +91,26 @@ class AddStoryActivity : AppCompatActivity() {
     private fun goToUpload() {
         binding.buttonAdd.setOnClickListener {
             val desc = binding.edAddDescription.text.toString().trim()
-            if (currentImageUri == null && desc.isEmpty()) {
-                Toast.makeText(this, R.string.pick_image_desc, Toast.LENGTH_SHORT).show()
-            } else if (desc.isEmpty()) {
-                Toast.makeText(this, R.string.select_image, Toast.LENGTH_SHORT).show()
-            } else if (currentImageUri == null ) {
-                Toast.makeText(this, R.string.fill_desc, Toast.LENGTH_SHORT).show()
-            } else {
-                createStory(desc)
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
+            when {
+                currentImageUri == null && desc.isEmpty() -> {
+                    Toast.makeText(this, R.string.pick_image_desc, Toast.LENGTH_SHORT).show()
+                }
+                desc.isEmpty() -> {
+                    Toast.makeText(this, R.string.select_image, Toast.LENGTH_SHORT).show()
+                }
+                currentImageUri == null -> {
+                    Toast.makeText(this, R.string.fill_desc, Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    if (binding.switchLocation.isChecked) {
+                        getDeviceLocation()
+                    } else {
+                        createStory(desc)
+                    }
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                }
             }
         }
     }
@@ -110,7 +130,7 @@ class AddStoryActivity : AppCompatActivity() {
             }
             val image = convertImage()
             val desc = convertDescription(description)
-            addStoryViewModel.postStory(image, desc).observe(this@AddStoryActivity) { result ->
+            addStoryViewModel.postStory(image, desc, lat, lon).observe(this@AddStoryActivity) { result ->
                 if (result != null) {
                     when(result) {
                         is com.farisafra.dicodingstory.data.repository.Result.Loading -> {
@@ -130,6 +150,62 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
+    private fun createStoryWithLocation(description: String) {
+        currentImageUri?.let { uri ->
+            fun convertImage(): MultipartBody.Part {
+                val imageFile = uriToFile(uri, this).reduceFileImage()
+                Log.d("Image File", "showImage: ${imageFile.path}")
+                val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
+
+                return MultipartBody.Part.createFormData(
+                    "photo",
+                    imageFile.name,
+                    requestImageFile
+                )
+            }
+
+            val image = convertImage()
+            val desc = convertDescription(description)
+
+
+            addStoryViewModel.postStory(image, desc, lat, lon).observe(this@AddStoryActivity) { result ->
+                if (result != null) {
+                    when(result) {
+                        is com.farisafra.dicodingstory.data.repository.Result.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                        }
+                        is com.farisafra.dicodingstory.data.repository.Result.Error -> {
+                            progressBar.visibility = View.GONE
+                            errorResponse()
+                        }
+                        is com.farisafra.dicodingstory.data.repository.Result.Success -> {
+                            successResponse()
+                            progressBar.visibility = View.GONE
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getDeviceLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        lat = location.latitude
+                        lon = location.longitude
+                        createStoryWithLocation(binding.edAddDescription.text.toString().trim())
+                    }
+                }
+        } else {
+            requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
 
     private fun convertDescription(description: String): RequestBody {
         return description.toRequestBody("text/plain".toMediaType())
@@ -169,26 +245,18 @@ class AddStoryActivity : AppCompatActivity() {
         ResponseView(this, R.string.register_message, R.drawable.registered).show()
     }
 
-    private fun openGallery() {
-        binding.btnGallery.setOnClickListener {
-            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent, REQUEST_PICK_IMAGE)
+    private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            currentImageUri = uri
+            binding.ivStoryPhoto.setImageURI(uri)
+            Glide.with(this).load(currentImageUri).into(binding.ivStoryPhoto)
+            showDeleteBtn()
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            when (requestCode) {
-                REQUEST_PICK_IMAGE -> {
-                    data?.data?.let { uri ->
-                        currentImageUri = uri
-                        binding.ivStoryPhoto.setImageURI(uri)
-                        Glide.with(this).load(currentImageUri).into(binding.ivStoryPhoto)
-                        showDeleteBtn()
-                    }
-                }
-            }
+    private fun openGallery() {
+        binding.btnGallery.setOnClickListener {
+            pickImage.launch("image/*")
         }
     }
 
@@ -215,5 +283,6 @@ class AddStoryActivity : AppCompatActivity() {
     companion object {
         private const val REQUEST_PICK_IMAGE = 1
         private const val REQUIRED_PERMISSION = android.Manifest.permission.CAMERA
+        private const val TAG = "AddStoryActivity"
     }
 }

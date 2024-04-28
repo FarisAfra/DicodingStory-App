@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityMainBinding
 import com.farisafra.dicodingstory.ui.adapter.StoryAdapter
 import com.farisafra.dicodingstory.ui.customview.ResponseView
+import com.farisafra.dicodingstory.data.repository.Result
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         fetchStories()
         moveToAddStory()
         refreshPage()
-
+        moveToMaps()
     }
 
     private fun setupRecyclerView() {
@@ -58,17 +60,17 @@ class MainActivity : AppCompatActivity() {
         storiesViewModel.getStories().observe(this) { result ->
             if (result != null) {
                 when (result) {
-                    is com.farisafra.dicodingstory.data.repository.Result.Loading -> {
-                        binding?.progressBar?.visibility = View.VISIBLE
+                    is Result.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
                     }
-                    is com.farisafra.dicodingstory.data.repository.Result.Success -> {
-                        binding?.progressBar?.visibility = View.GONE
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.GONE
                         val storyData = result.data.listStory
                         storyAdapter.submitList(storyData)
                         swipeRefreshLayout.isRefreshing = false
                     }
-                    is com.farisafra.dicodingstory.data.repository.Result.Error -> {
-                        binding?.progressBar?.visibility = View.GONE
+                    is Result.Error -> {
+                        binding.progressBar.visibility = View.GONE
                         errorResponse()
                     }
                 }
@@ -102,6 +104,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun moveToMaps() {
+        binding.btnMaps.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     private var backPressedOnce = false
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -111,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 backPressedOnce = true
                 Toast.makeText(this, R.string.backToExit, Toast.LENGTH_SHORT).show()
-                Handler().postDelayed({ backPressedOnce = false }, 2000)
+                Handler(Looper.getMainLooper()).postDelayed({ backPressedOnce = false }, EXIT_DELAY)
             }
             return true
         }
@@ -121,5 +130,9 @@ class MainActivity : AppCompatActivity() {
     private fun errorResponse() {
         ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
         refreshPage()
+    }
+
+    companion object {
+        private const val EXIT_DELAY = 2000L
     }
 }

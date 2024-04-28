@@ -13,6 +13,7 @@ import com.farisafra.dicodingstory.data.preferences.LoginPreference
 
 
 class SplashScreenActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -34,8 +35,12 @@ class SplashScreenActivity : AppCompatActivity() {
                     startActivity(Intent(this, OnBoardingActivity::class.java))
                     finish()
                 }
-                finish()
-            }, 3000)
-        }, 1000)
+            }, SPLASH_DELAY_LONG)
+        }, SPLASH_DELAY_SHORT)
+    }
+
+    companion object {
+        private const val SPLASH_DELAY_SHORT = 1000L
+        private const val SPLASH_DELAY_LONG = 3000L
     }
 }

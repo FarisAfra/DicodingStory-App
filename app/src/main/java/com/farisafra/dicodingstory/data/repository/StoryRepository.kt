@@ -57,7 +57,9 @@ class StoryRepository(private val preference: LoginPreference, private val apiSe
 
     fun addStory(
         imageFile: MultipartBody.Part,
-        desc: RequestBody
+        desc: RequestBody,
+        lat: Double,
+        lon: Double
     ): LiveData<Result<AddStoryResponse>> = liveData {
         emit(Result.Loading)
         try {
@@ -65,6 +67,8 @@ class StoryRepository(private val preference: LoginPreference, private val apiSe
                 token = "Bearer ${preference.getLogin().token}",
                 file = imageFile,
                 description = desc,
+                lat = lat,
+                lon = lon
             )
             if (response.error) {
                 emit(Result.Error(response.message))
@@ -94,6 +98,7 @@ class StoryRepository(private val preference: LoginPreference, private val apiSe
             emit(Result.Error(e.message.toString()))
         }
     }
+
 
         companion object {
         @Volatile

@@ -58,14 +58,16 @@ class StoryAdapter(private val stories: ArrayList<Story>)
             binding.apply {
                 tvItemName.text = story.name
                 tvDesc.text = story.description
-                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
                 val date = simpleDateFormat.parse(story.createdAt)
 
                 val timeZone = TimeZone.getTimeZone("Asia/Jakarta")
 
                 val calendar = Calendar.getInstance()
-                calendar.setTime(date)
-                calendar.add(Calendar.HOUR_OF_DAY, 7)
+                date?.let {
+                    calendar.time = it
+                    calendar.add(Calendar.HOUR_OF_DAY, 7)
+                }
 
                 val adjustedTime = calendar.time
 

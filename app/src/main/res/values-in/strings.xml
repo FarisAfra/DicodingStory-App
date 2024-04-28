@@ -91,11 +91,20 @@
     <!-- Respon-->
     <string name="error_message">Ada yang Salah.\nSilakan coba lagi nanti.</string>
     <string name="register_message">Selamat! \nSukses Mendaftar</string>
+    <string name="ok">OK</string>
+    <string name="response_image">Response Image</string>
 
     <!--    Widget-->
     <string name="appwidget_text">Dicoding Story App</string>
     <string name="add_widget">Tambah widget</string>
     <string name="app_widget_description">Ini adalah deskripsi widget</string>
     <string name="widget_content">Konten Widget</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="maps_story">Maps Story</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
 
 </resources>

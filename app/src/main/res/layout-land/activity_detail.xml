@@ -119,6 +119,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvNameApp" />
 
+    <ImageButton
+        android:id="@+id/btnMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDetailStory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNameApp"
+        app:srcCompat="@drawable/maps" />
+
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"

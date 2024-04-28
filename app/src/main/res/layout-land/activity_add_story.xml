@@ -35,7 +35,7 @@
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_background2"
         android:elevation="25dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,6 +119,7 @@
         style="@style/poppinsRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/add_description"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -164,5 +165,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/switchLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Simpan Lokasi Pengguna"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/navi"
+        android:thumbTint="@color/navi"
+        android:trackTint="@color/grey"
+        app:layout_constraintEnd_toEndOf="@+id/btnGallery"
+        app:layout_constraintStart_toStartOf="@+id/btnCamera"
+        app:layout_constraintTop_toBottomOf="@+id/btnGallery"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

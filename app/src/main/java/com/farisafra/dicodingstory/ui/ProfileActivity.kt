@@ -20,8 +20,6 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var loginPreference: LoginPreference
-    private val PICK_IMAGE_REQUEST = 1
-    private val PREFS_NAME = "MyPrefs"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +108,7 @@ class ProfileActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val fileName = sharedPreferences.getString("imageFileName", "")
 
-        if (fileName != null && fileName.isNotEmpty()) {
+        if (!fileName.isNullOrEmpty()) {
             val directory = File(filesDir, "images")
             val file = File(directory, fileName)
 
@@ -176,6 +174,11 @@ class ProfileActivity : AppCompatActivity() {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    companion object {
+        private const val PICK_IMAGE_REQUEST = 1
+        private const val PREFS_NAME = "MyPrefs"
     }
 
 }
