@@ -35,6 +35,8 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+
+
     }
     buildFeatures{
         viewBinding = true
@@ -66,4 +68,5 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.google.android.gms:play-services-location:18.0.0")
     implementation("androidx.paging:paging-runtime-ktx:3.1.0")
+    implementation("androidx.room:room-paging:2.4.0-rc01")
 }

@@ -16,15 +16,29 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
+import com.farisafra.dicodingstory.data.response.story.StoryResponse
 
-class StoryAdapter(private val stories: ArrayList<Story>)
-    : RecyclerView.Adapter<StoryAdapter.StoryViewHolder>() {
+class StoryAdapter(
+    private val storiesDiffCallback: DiffUtil.ItemCallback<Story>
+) : PagingDataAdapter<Story, StoryAdapter.StoryViewHolder>(storiesDiffCallback) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
+        val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return StoryViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
+        val story = getItem(position) ?: return
+
+        holder.bind(story)
+    }
 
     inner class StoryViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         init {
             binding.root.setOnClickListener(this)
         }
-
 
         override fun onClick(v: View?) {
             val context = binding.root.context
@@ -46,15 +60,13 @@ class StoryAdapter(private val stories: ArrayList<Story>)
 
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                val story = stories[position]
-
+                val story = getItem(position) ?: return
                 intent.putExtra("EXTRA_STORY", story)
                 itemView.context.startActivity(intent, optionsCompat.toBundle())
             }
         }
 
-            fun bind(story: Story) {
-
+        fun bind(story: Story) {
             binding.apply {
                 tvItemName.text = story.name
                 tvDesc.text = story.description
@@ -80,30 +92,20 @@ class StoryAdapter(private val stories: ArrayList<Story>)
                 Glide.with(itemView.context)
                     .load(story.photoUrl)
                     .into(ivItemPhoto)
-
             }
         }
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
-        val binding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StoryViewHolder(binding)
-    }
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
 
-    override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        val story = stories[position]
-        holder.bind(story)
-    }
-
-    override fun getItemCount(): Int {
-        return stories.size
-    }
-
-    fun submitList(newStories: List<Story>) {
-        stories.clear()
-        stories.addAll(newStories)
-        notifyDataSetChanged()
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 }
 

@@ -6,6 +6,7 @@ import com.farisafra.dicodingstory.data.response.story.AddStoryResponse
 import com.farisafra.dicodingstory.data.response.story.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -42,6 +43,15 @@ interface ApiService {
         @Query("size") size: Int,
         @Query("location") location: Int
     ): StoryResponse
+
+    @GET("stories")
+    @Headers("Content-Type:application/json; charset=UTF-8")
+    suspend fun getStories(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("location") location: Int
+    ): Response<StoryResponse>
 
     @Multipart
     @POST("stories")

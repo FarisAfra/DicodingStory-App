@@ -19,8 +19,11 @@ import com.farisafra.dicodingstory.databinding.ActivityMainBinding
 import com.farisafra.dicodingstory.ui.adapter.StoryAdapter
 import com.farisafra.dicodingstory.ui.customview.ResponseView
 import com.farisafra.dicodingstory.data.repository.Result
+import com.farisafra.dicodingstory.data.response.story.Story
+import com.farisafra.dicodingstory.ui.adapter.LoadingStateAdapter
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginPreference: LoginPreference
     private lateinit var storyAdapter: StoryAdapter
@@ -33,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        storyAdapter = StoryAdapter(ArrayList())
-
+        storyAdapter = StoryAdapter(StoryAdapter.DIFF_CALLBACK) // Use the DiffCallback
         setupViewModel()
         getusername()
         setupRecyclerView()
@@ -45,7 +47,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        storyAdapter = StoryAdapter(ArrayList())
         binding.rvStories.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = storyAdapter
@@ -57,24 +58,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchStories() {
-        storiesViewModel.getStories().observe(this) { result ->
-            if (result != null) {
-                when (result) {
-                    is Result.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                    is Result.Success -> {
-                        binding.progressBar.visibility = View.GONE
-                        val storyData = result.data.listStory
-                        storyAdapter.submitList(storyData)
-                        swipeRefreshLayout.isRefreshing = false
-                    }
-                    is Result.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                        errorResponse()
-                    }
-                }
+        val adapter = storyAdapter
+        binding.rvStories.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
             }
+        )
+        storiesViewModel.getstory.observe(this) { pagingData ->
+            storyAdapter.submitData(lifecycle, pagingData)
         }
     }
 
@@ -94,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
             fetchStories()
             Toast.makeText(this, R.string.updateData, Toast.LENGTH_SHORT).show()
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -111,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Handle back button logic (optional)
     private var backPressedOnce = false
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -125,11 +118,6 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
-    }
-
-    private fun errorResponse() {
-        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
-        refreshPage()
     }
 
     companion object {

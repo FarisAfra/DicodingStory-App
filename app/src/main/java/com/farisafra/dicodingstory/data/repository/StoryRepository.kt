@@ -2,16 +2,33 @@ package com.farisafra.dicodingstory.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.farisafra.dicodingstory.data.paging.StoryPagingSource
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import com.farisafra.dicodingstory.data.response.login.LoginResponse
 import com.farisafra.dicodingstory.data.response.register.RegisterResponse
 import com.farisafra.dicodingstory.data.response.story.AddStoryResponse
+import com.farisafra.dicodingstory.data.response.story.Story
 import com.farisafra.dicodingstory.data.response.story.StoryResponse
 import com.farisafra.dicodingstory.data.retrofit.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 class StoryRepository(private val preference: LoginPreference, private val apiService: ApiService) {
+
+    fun getStory(): LiveData<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, preference)
+            }
+        ).liveData
+    }
 
     fun login(
         email: String,
