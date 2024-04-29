@@ -18,7 +18,6 @@ import java.util.TimeZone
 import androidx.core.util.Pair
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.farisafra.dicodingstory.data.response.story.StoryResponse
 
 class StoryAdapter(
     private val storiesDiffCallback: DiffUtil.ItemCallback<Story>

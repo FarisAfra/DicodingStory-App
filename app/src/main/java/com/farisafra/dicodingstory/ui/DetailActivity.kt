@@ -1,22 +1,12 @@
 package com.farisafra.dicodingstory.ui
 
 import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import com.bumptech.glide.Glide
 import com.farisafra.dicodingstory.R
 import com.farisafra.dicodingstory.data.response.story.Story
 import com.farisafra.dicodingstory.databinding.ActivityDetailBinding
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -81,10 +71,6 @@ class DetailActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    companion object {
-        private const val TAG = "MapsActivity"
     }
 
 }

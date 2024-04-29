@@ -59,7 +59,7 @@
         app:layout_constraintStart_toStartOf="@+id/desc1"
         app:layout_constraintTop_toBottomOf="@+id/desc1" />
 
-    <EditText
+    <com.farisafra.dicodingstory.ui.customview.CustomEditText
         android:id="@+id/ed_register_name"
         style="@style/poppinsLight"
         android:layout_width="275dp"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
-    <com.farisafra.dicodingstory.ui.customview.EmailEditText
+    <com.farisafra.dicodingstory.ui.customview.CustomEditText
         android:id="@+id/ed_register_email"
         style="@style/poppinsLight"
         android:layout_width="275dp"
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvEmail"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-    <com.farisafra.dicodingstory.ui.customview.PasswordEditText
+    <com.farisafra.dicodingstory.ui.customview.CustomEditText
         android:id="@+id/ed_register_password"
         style="@style/poppinsLight"
         android:layout_width="275dp"

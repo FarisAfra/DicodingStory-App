@@ -13,6 +13,11 @@
     <string name="photo_item">Photo Item</string>
     <string name="bg_circle">Circle Background</string>
     <string name="permission">Permission request granted</string>
+    <string name="buka_peta">Open Maps</string>
+    <string name="null_view">Null View</string>
+    <string name="buka_setting">Open Setting</string>
+    <string name="no_data">No Data</string>
+    <string name="try_again">Try Again</string>
 
     <!--    Register-->
     <string name="fill_data">Please ill in the data correctly</string>
@@ -49,10 +54,11 @@
     <string name="pick_image_desc">Please select an image and fill in the description</string>
     <string name="select_image">Please select an image first</string>
     <string name="fill_desc">Please fill in the description first</string>
+    <string name="simpan_lokasi_pengguna">Save User Location</string>
 
     <!--    Detail-->
     <string name="desc_item">Lorem Ipsum Dolor Sit Amet. Adis Picing dolor sir</string>
-    <string name="date_time">2024-04-05T04:56:28.376Z</string>
+    <string name="date_time">29 April 2024 at 12:34 WIB</string>
     <string name="detail_story">Detail Story</string>
     <string name="uploader">Uploaded By:</string>
     <string name="desc_story">Description Story:</string>
@@ -90,6 +96,7 @@
     <!--    Response-->
     <string name="error_message">Something Wrong.\nPlease try again later.</string>
     <string name="register_message">Congratulations! \nSuccess to Register</string>
+    <string name="upload_message">Congratulations! \nSuccess to Create Story</string>
     <string name="ok">OK</string>
     <string name="response_image">Response Image</string>
 
@@ -99,12 +106,19 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="widget_content">Widget Content</string>
 
+<!--    Maps-->
     <string name="title_activity_maps">MapsActivity</string>
     <string name="maps_story">Maps Story</string>
     <string name="normal_type">Normal</string>
     <string name="satellite_type">Satellite</string>
     <string name="terrain_type">Terrain</string>
     <string name="hybrid_type">Hybrid</string>
+    <string name="show_my_loc">Show My Location</string>
 
+<!--    Custom EditText-->
+    <string name="error_name">Please Input Your Name</string>
+    <string name="error_email">Invalid Email Format</string>
+    <string name="error_password">Input Min. 8 Char</string>
+    <string name="error_desc">Please Input Description</string>
 
 </resources>

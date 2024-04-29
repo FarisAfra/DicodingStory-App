@@ -104,6 +104,7 @@
 
     <ImageButton
         android:id="@+id/btnMaps"
+        android:contentDescription="@string/buka_peta"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
@@ -112,5 +113,17 @@
         app:layout_constraintEnd_toStartOf="@+id/btnProfil"
         app:layout_constraintTop_toTopOf="@+id/btnProfil"
         app:srcCompat="@drawable/maps" />
+
+    <ImageView
+        android:id="@+id/emptyViewImage"
+        android:contentDescription="@string/null_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeRefreshLayout"
+        app:layout_constraintEnd_toEndOf="@+id/swipeRefreshLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout"
+        app:srcCompat="@drawable/nodata" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

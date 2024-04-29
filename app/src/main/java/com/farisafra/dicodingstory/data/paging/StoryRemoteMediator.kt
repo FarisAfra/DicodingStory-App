@@ -2,7 +2,6 @@ package com.farisafra.dicodingstory.data.paging
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
-import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.farisafra.dicodingstory.data.preferences.LoginPreference

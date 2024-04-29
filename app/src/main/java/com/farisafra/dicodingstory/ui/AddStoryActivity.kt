@@ -1,11 +1,13 @@
 package com.farisafra.dicodingstory.ui
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -24,9 +26,6 @@ import com.farisafra.dicodingstory.databinding.ActivityAddStoryBinding
 import com.farisafra.dicodingstory.ui.customview.ResponseView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -102,17 +101,25 @@ class AddStoryActivity : AppCompatActivity() {
                     Toast.makeText(this, R.string.fill_desc, Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    if (binding.switchLocation.isChecked) {
-                        getDeviceLocation()
+                    if (isNetworkAvailable(this)) {
+                        if (binding.switchLocation.isChecked) {
+                            getDeviceLocation()
+                        } else {
+                            createStory(desc)
+                        }
                     } else {
-                        createStory(desc)
+                        errorResponse()
                     }
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
+                    moveToMain()
                 }
             }
         }
+    }
+
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 
     private fun createStory(description: String) {
@@ -236,13 +243,20 @@ class AddStoryActivity : AppCompatActivity() {
 
 
     private fun errorResponse() {
-        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
+        ResponseView(this, R.string.error_message, R.drawable.symbols_error, moveToMain()).show()
     }
 
     private fun successResponse() {
-        binding.edAddDescription.text?.clear()
         deleteImage()
-        ResponseView(this, R.string.register_message, R.drawable.registered).show()
+        ResponseView(this, R.string.register_message, R.drawable.uploaded, moveToMain()).show()
+    }
+
+    private fun moveToMain(): () -> Unit {
+        return {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -281,8 +295,6 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val REQUEST_PICK_IMAGE = 1
         private const val REQUIRED_PERMISSION = android.Manifest.permission.CAMERA
-        private const val TAG = "AddStoryActivity"
     }
 }

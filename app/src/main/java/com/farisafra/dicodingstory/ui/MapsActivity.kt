@@ -57,7 +57,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         fetchStories()
         menuMaps()
         backActivity()
-        MyLocation()
+        myLocation()
         addStory()
     }
 
@@ -175,7 +175,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     is Result.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        StoryMarker(result.data.listStory)
+                        storyMarker(result.data.listStory)
                     }
                     is Result.Error -> {
                         binding.progressBar.visibility = View.GONE
@@ -186,7 +186,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun MyLocation() {
+    private fun myLocation() {
         binding.btnMyLocation.setOnClickListener {
             getDeviceLocation()
         }
@@ -204,11 +204,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun errorResponse() {
-        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
+    private fun moveToMain(): () -> Unit {
+        return {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
-    private fun StoryMarker(listStory: List<Story>) {
+    private fun errorResponse() {
+        ResponseView(this, R.string.error_message, R.drawable.symbols_error, moveToMain()).show()
+    }
+
+    private fun storyMarker(listStory: List<Story>) {
         listStory.forEach{story ->
             val latLng = LatLng(story.lat, story.lon)
 

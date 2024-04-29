@@ -32,6 +32,7 @@
 
         <ImageButton
             android:id="@+id/btnBack"
+            android:contentDescription="@string/go_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,6 +44,7 @@
 
         <ImageButton
             android:id="@+id/btnSetting"
+            android:contentDescription="@string/buka_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -81,6 +83,7 @@
 
     <ImageButton
         android:id="@+id/btnMyLocation"
+        android:contentDescription="@string/show_my_loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent"
@@ -101,6 +104,7 @@
 
     <ImageButton
         android:id="@+id/btnAddStory"
+        android:contentDescription="@string/add_a_new_story"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"

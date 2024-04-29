@@ -135,7 +135,7 @@
             app:layout_constraintStart_toStartOf="@+id/btnCamera"
             app:layout_constraintTop_toBottomOf="@+id/btnGallery" />
 
-        <com.farisafra.dicodingstory.ui.customview.DescEditText
+        <com.farisafra.dicodingstory.ui.customview.CustomEditText
             android:id="@+id/ed_add_description"
             android:layout_width="match_parent"
             android:layout_height="150dp"

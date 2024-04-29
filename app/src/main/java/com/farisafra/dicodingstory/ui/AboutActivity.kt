@@ -3,7 +3,6 @@ package com.farisafra.dicodingstory.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.farisafra.dicodingstory.R
 import com.farisafra.dicodingstory.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {

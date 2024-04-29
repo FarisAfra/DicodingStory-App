@@ -64,7 +64,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/desc1" />
 
-        <com.farisafra.dicodingstory.ui.customview.EmailEditText
+        <com.farisafra.dicodingstory.ui.customview.CustomEditText
             android:id="@+id/ed_login_email"
             style="@style/poppinsLight"
             android:layout_width="275dp"
@@ -85,7 +85,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-        <com.farisafra.dicodingstory.ui.customview.PasswordEditText
+        <com.farisafra.dicodingstory.ui.customview.CustomEditText
             android:id="@+id/ed_login_password"
             style="@style/poppinsLight"
             android:layout_width="275dp"

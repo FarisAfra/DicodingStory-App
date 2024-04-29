@@ -1,6 +1,9 @@
 package com.farisafra.dicodingstory.ui
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.farisafra.dicodingstory.R
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
@@ -18,8 +22,6 @@ import com.farisafra.dicodingstory.data.viewmodel.ViewModelFactory
 import com.farisafra.dicodingstory.databinding.ActivityMainBinding
 import com.farisafra.dicodingstory.ui.adapter.StoryAdapter
 import com.farisafra.dicodingstory.ui.customview.ResponseView
-import com.farisafra.dicodingstory.data.repository.Result
-import com.farisafra.dicodingstory.data.response.story.Story
 import com.farisafra.dicodingstory.ui.adapter.LoadingStateAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -31,12 +33,13 @@ class MainActivity : AppCompatActivity() {
     private val storiesViewModel: StoriesViewModel by viewModels { vmFactory }
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        storyAdapter = StoryAdapter(StoryAdapter.DIFF_CALLBACK) // Use the DiffCallback
+        storyAdapter = StoryAdapter(StoryAdapter.DIFF_CALLBACK)
         setupViewModel()
         getusername()
         setupRecyclerView()
@@ -50,7 +53,17 @@ class MainActivity : AppCompatActivity() {
         binding.rvStories.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = storyAdapter
+
         }
+
+        storyAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                super.onChanged()
+                showEmptyView()
+                errorResponse()
+            }
+        })
+
     }
 
     private fun setupViewModel() {
@@ -58,15 +71,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchStories() {
-        val adapter = storyAdapter
-        binding.rvStories.adapter = adapter.withLoadStateFooter(
-            footer = LoadingStateAdapter {
-                adapter.retry()
+        if (isNetworkAvailable(this)) {
+            val adapter = storyAdapter
+            binding.rvStories.adapter = adapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    adapter.retry()
+                }
+            )
+            storiesViewModel.getstory.observe(this) { pagingData ->
+                storyAdapter.submitData(lifecycle, pagingData)
             }
-        )
-        storiesViewModel.getstory.observe(this) { pagingData ->
-            storyAdapter.submitData(lifecycle, pagingData)
+        } else {
+            showEmptyView()
+            Toast.makeText(this, R.string.error_message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 
     private fun getusername() {
@@ -84,6 +108,8 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
             fetchStories()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             Toast.makeText(this, R.string.updateData, Toast.LENGTH_SHORT).show()
             swipeRefreshLayout.isRefreshing = false
         }
@@ -103,7 +129,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Handle back button logic (optional)
     private var backPressedOnce = false
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -118,6 +143,18 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    private fun showEmptyView() {
+        if (storyAdapter.itemCount == 0) {
+            binding.emptyViewImage.visibility = View.VISIBLE
+        } else {
+            binding.emptyViewImage.visibility = View.GONE
+        }
+    }
+
+    private fun errorResponse() {
+        ResponseView(this, R.string.error_message, R.drawable.symbols_error).show()
     }
 
     companion object {

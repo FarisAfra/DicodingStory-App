@@ -2,11 +2,13 @@ package com.farisafra.dicodingstory.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.farisafra.dicodingstory.data.paging.StoryPagingSource
+import com.farisafra.dicodingstory.data.paging.StoryRemoteMediator
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import com.farisafra.dicodingstory.data.response.login.LoginResponse
 import com.farisafra.dicodingstory.data.response.register.RegisterResponse
@@ -20,10 +22,12 @@ import okhttp3.RequestBody
 class StoryRepository(private val preference: LoginPreference, private val apiService: ApiService) {
 
     fun getStory(): LiveData<PagingData<Story>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
+            remoteMediator = StoryRemoteMediator(preference, apiService),
             pagingSourceFactory = {
                 StoryPagingSource(apiService, preference)
             }

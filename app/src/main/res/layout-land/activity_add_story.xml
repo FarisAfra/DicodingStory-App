@@ -126,7 +126,7 @@
         app:layout_constraintStart_toEndOf="@+id/constraintLayout"
         app:layout_constraintTop_toBottomOf="@+id/tvAddStory" />
 
-    <com.farisafra.dicodingstory.ui.customview.DescEditText
+    <com.farisafra.dicodingstory.ui.customview.CustomEditText
         android:id="@+id/ed_add_description"
         style="@style/poppinsMedium"
         android:layout_width="300dp"
@@ -171,7 +171,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Simpan Lokasi Pengguna"
+        android:text="@string/simpan_lokasi_pengguna"
         android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/navi"
         android:thumbTint="@color/navi"

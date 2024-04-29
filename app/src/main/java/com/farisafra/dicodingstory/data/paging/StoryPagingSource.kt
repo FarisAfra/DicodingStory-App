@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.farisafra.dicodingstory.data.preferences.LoginPreference
 import com.farisafra.dicodingstory.data.response.story.Story
-import com.farisafra.dicodingstory.data.response.story.StoryResponse
 import com.farisafra.dicodingstory.data.retrofit.ApiService
 
 class StoryPagingSource(
@@ -26,6 +25,7 @@ class StoryPagingSource(
                 )
             } else {
                 return LoadResult.Error(Exception("Failed to load story"))
+
             }
         } else {
             return LoadResult.Error(Exception("Token empty"))
@@ -38,6 +38,7 @@ class StoryPagingSource(
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
+
 
     private companion object {
         const val INITIAL_PAGE_INDEX = 1
