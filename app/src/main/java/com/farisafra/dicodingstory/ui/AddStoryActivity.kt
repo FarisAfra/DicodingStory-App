@@ -248,7 +248,7 @@ class AddStoryActivity : AppCompatActivity() {
 
     private fun successResponse() {
         deleteImage()
-        ResponseView(this, R.string.register_message, R.drawable.uploaded, moveToMain()).show()
+        ResponseView(this, R.string.upload_message, R.drawable.uploaded, moveToMain()).show()
     }
 
     private fun moveToMain(): () -> Unit {
