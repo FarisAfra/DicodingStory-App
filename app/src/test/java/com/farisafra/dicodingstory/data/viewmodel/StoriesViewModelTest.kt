@@ -60,7 +60,30 @@ class StoriesViewModelTest {
         assertNotNull(differ.snapshot())
         assertEquals(dummyStory.listStory, differ.snapshot())
         assertEquals(dummyStory.listStory.size, differ.snapshot().size)
-        assertEquals(dummyStory.listStory[0].name, differ.snapshot()[0]?.name)
+        assertEquals(dummyStory.listStory[0], differ.snapshot()[0])
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `Get Empty Story`() = runBlocking {
+        val emptyData: PagingData<Story> = PagingData.empty()
+        val expectedResponse = MutableLiveData<PagingData<Story>>()
+
+        expectedResponse.value = emptyData
+        `when`(storyRepository.getStory()).thenReturn(expectedResponse)
+
+        val storiesViewModel = StoriesViewModel(storyRepository)
+        val actualStory: PagingData<Story> = storiesViewModel.getstory.getOrAwaitValue()
+
+        val differ = AsyncPagingDataDiffer(
+            diffCallback = StoryAdapter.DIFF_CALLBACK,
+            updateCallback = noopListUpdateCallback,
+            workerDispatcher = Dispatchers.Main,
+        )
+        differ.submitData(actualStory)
+
+        assertNotNull(differ.snapshot())
+        assertEquals(0, differ.snapshot().size)
     }
 }
 
